@@ -7,4 +7,3 @@ WebHook/webhook-tools.py
 Resource/sql/*
 
 Database/data/*
-Database/init/*.sql

@@ -1,0 +1,10 @@
+WebHook/__pycache__
+*.log
+WebHook/webhook-tools.py
+
+*.jar
+*.xls
+Resource/sql/*
+
+Database/data/*
+Database/init/*

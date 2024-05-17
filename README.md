@@ -74,7 +74,7 @@ services:
     ports:
       - "10669:80"
     environment:
-      - API_BASE_URL=http://ip:port #此处务必填写Server 的ip地址与端口号 ，见59行
+      - API_BASE_URL=http://ip:10670 #此处务必填写Server 的ip地址与端口号 ，见59行
     volumes:
       #- ./Web/dist:/usr/share/nginx/html #如若需要自行修改前端，请将前端放置在Web/dist目录下，并解开此行注释
       #- ./Web/nginx/default.conf:/etc/nginx/conf.d/default.conf #如若需要自行修改nginx配置，请将配置文件放置在Web/nginx/default.conf目录下，并解开此行注释
@@ -172,15 +172,15 @@ chmod u+x start-easyaccounts.sh
 ```
 
 ### 项目服务说明
-- 服务端：http://ip:10670，用于提供后端服务
-- 前端：http://ip:10669，用于提供前端服务
-- WebHook：http://ip:10671，用于提供WebHook服务，生成的excel、sql的时候，会主动调用该服务，具体功能请查看WebHook/webhook.py，可以自行修改这个代码，修改完后，重启compose即可生效，文件会传输到WebHook接口里，可以自行开发
-- 数据库：http://ip:10668，用于提供数据库服务
+- 服务端：http://ip:10670 ，用于提供后端服务
+- 前端：http://ip:10669 ，用于提供前端服务
+- WebHook：http://ip:10671 ，用于提供WebHook服务，生成的excel、sql的时候，会主动调用该服务，具体功能请查看WebHook/webhook.py，可以自行修改这个代码，修改完后，重启compose即可生效，文件会传输到WebHook接口里，可以自行开发
+- 数据库：http://ip:10668 ，用于提供数据库服务
 
 ### 项目访问
-- 记账系统：访问http://ip:10669，即可进入记账系统，进去之后是空白的，可能会报错，因为没有数据，需要自行添加数据，点击下面的“总览”、“流水”、“设置”添加数据，然后记账即可
-- 服务端swagger：http://ip:10670/swagger-ui.html，可以查看服务端的接口文档
-- 生成的excel、sql文件：http://ip:10669/resources，可以查看生成的excel、sql文件，可以自行下载
+- 记账系统：访问 http://ip:10669 ，即可进入记账系统，进去之后是空白的，可能会报错，因为没有数据，需要自行添加数据，点击下面的“总览”、“流水”、“设置”添加数据，然后记账即可
+- 服务端swagger：http://ip:10670/swagger-ui.html ，可以查看服务端的接口文档
+- 生成的excel、sql文件：http://ip:10669/resources ，可以查看生成的excel、sql文件，可以自行下载
 
 ## 功能  
 项目主体功能是基于账户的记账，所有的金额都是基于账户来进行的。  

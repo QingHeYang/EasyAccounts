@@ -45,6 +45,15 @@ CREATE TABLE `account` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `account`
+--
+
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `action`
 --
 
@@ -58,8 +67,18 @@ CREATE TABLE `action` (
   `handle` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `action_id_uindex` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作表';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作表';
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `action`
+--
+
+LOCK TABLES `action` WRITE;
+/*!40000 ALTER TABLE `action` DISABLE KEYS */;
+INSERT INTO `action` VALUES (15,'收入',0,0),(16,'支出',0,1),(17,'内部转账',0,2),(18,'借入',1,0),(19,'还钱',1,1),(20,'借出',1,1),(21,'收钱',1,0);
+/*!40000 ALTER TABLE `action` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `date`
@@ -72,6 +91,15 @@ CREATE TABLE `date` (
   `id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `date`
+--
+
+LOCK TABLES `date` WRITE;
+/*!40000 ALTER TABLE `date` DISABLE KEYS */;
+/*!40000 ALTER TABLE `date` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `excel`
@@ -90,6 +118,15 @@ CREATE TABLE `excel` (
   UNIQUE KEY `excel_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `excel`
+--
+
+LOCK TABLES `excel` WRITE;
+/*!40000 ALTER TABLE `excel` DISABLE KEYS */;
+/*!40000 ALTER TABLE `excel` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `flow`
@@ -117,6 +154,15 @@ CREATE TABLE `flow` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `flow`
+--
+
+LOCK TABLES `flow` WRITE;
+/*!40000 ALTER TABLE `flow` DISABLE KEYS */;
+/*!40000 ALTER TABLE `flow` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `type`
 --
 
@@ -135,6 +181,15 @@ CREATE TABLE `type` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `type`
+--
+
+LOCK TABLES `type` WRITE;
+/*!40000 ALTER TABLE `type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -149,6 +204,15 @@ CREATE TABLE `user` (
   UNIQUE KEY `user_id_uindex` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -159,4 +223,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-16 11:13:27
+-- Dump completed on 2024-05-17  0:59:03

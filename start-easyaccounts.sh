@@ -32,7 +32,7 @@ docker run -d \
   --network easy_accounts_net \
   --restart always \
   -p 10669:80 \
-  -e API_BASE_URL=http://192.168.50.226:10670 \
+  -e API_BASE_URL=http://{ip}:10670 \
   -v "$(pwd)/Resource:/usr/share/nginx/html/resources" \
   775495797/easyaccounts-nginx:latest
 
@@ -47,7 +47,8 @@ docker run -d \
   -e DB_PASSWORD=easy_accounts \
   -e SQL_BACKUP_TIME='00 00 22 * * ?' \
   -v "$(pwd)/Resource/sql:/Ledger/backup" \
-  -v "$(pwd)/Resource/excel:/Ledger/excel" \
+  -v "$(pwd)/Resource/excel/month:/Ledger/excel/month" \
+  -v "$(pwd)/Resource/excel/screen:/Ledger/excel/screen" \
   -v "$(pwd)/Server/logs:/Ledger/logs" \
   775495797/easyaccounts-server:latest
 

@@ -24,7 +24,15 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 git clone https://github.com/QingHeYang/EasyAccounts.git
 cd EasyAccounts
 ```
-下载完成后，进入项目目录，可以看到如下文件  
+
+**下载完成后，进入项目目录，搭建数据库目录**   
+!!!这步很重要，不要忽略  
+```shell
+mkdir -p Database/init
+cp Database/base_sql/yd_jz_base.sql Database/init/yd_jz_base.sql
+```
+
+搭建完后的目录可以看到如下文件  
 ```shell
  (base) root@tesla-t4:~/EasyAccounts# tree
 .

@@ -24,6 +24,8 @@ async def handle_webhook(file: UploadFile = File(...), file_name: str = Form(...
         file_content = await file.read()
         if file_type == "sql":
             result = await handleMySqlBackUp(file_content, file_name)
+        elif file_type == "analysis_excel":
+            result = await handleMonthExcelBackUp(file_content, file_name)
         elif file_type == "month_excel":
             result = await handleMonthExcelBackUp(file_content, file_name)
         elif file_type == "screen_excel":

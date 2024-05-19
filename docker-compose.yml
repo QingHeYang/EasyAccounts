@@ -30,9 +30,9 @@ services:
     container_name: easy_accounts_nginx
     image: 775495797/easyaccounts-nginx:latest
     ports:
-      - "10669:80"
+      - "71:80"
     environment:
-      - API_BASE_URL=http://ip:port #此处务必填写Server 的ip地址与端口号 ，见59行
+      - API_BASE_URL=http://ip:10670 #此处务必填写Server 的ip地址与端口号 ，见59行
     volumes:
       #- ./Web/dist:/usr/share/nginx/html #如若需要自行修改前端，请将前端放置在Web/dist目录下，并解开此行注释
       #- ./Web/nginx/default.conf:/etc/nginx/conf.d/default.conf #如若需要自行修改nginx配置，请将配置文件放置在Web/nginx/default.conf目录下，并解开此行注释
@@ -53,6 +53,7 @@ services:
       - ./Resource/sql:/Ledger/backup #数据库备份文件目录
       - ./Resource/excel/month:/Ledger/excel/month #excel 生成月度账单文件目录
       - ./Resource/excel/screen:/Ledger/excel/screen #excel 生成筛选账单文件目录
+      - ./Resource/excel/analysis:/Ledger/excel/analysis #excel 生成筛选账单文件目录
       - ./Server/logs:/Ledger/logs #日志文件目录
       #- ./Server/config/:/Ledger/config #配置文件目录
       #- ../EasyAccountsSource/Server/YD_JZ/target/YD_JZ-SNAPSHOT.jar:/Ledger/app/YD_JZ-SNAPSHOT.jar #服务端jar包，如若需要自行修改，请将jar包放置在Server/app目录下，并修改此行

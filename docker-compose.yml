@@ -53,10 +53,9 @@ services:
       - ./Resource/sql:/Ledger/backup #数据库备份文件目录
       - ./Resource/excel/month:/Ledger/excel/month #excel 生成月度账单文件目录
       - ./Resource/excel/screen:/Ledger/excel/screen #excel 生成筛选账单文件目录
-      - ./Resource/excel/analysis:/Ledger/excel/analysis #excel 生成筛选账单文件目录
+      - ./Resource/excel/month:/Ledger/excel/analysis #excel 生成筛选账单文件目录
       - ./Server/logs:/Ledger/logs #日志文件目录
-      #- ./Server/config/:/Ledger/config #配置文件目录
-      #- ../EasyAccountsSource/Server/YD_JZ/target/YD_JZ-SNAPSHOT.jar:/Ledger/app/YD_JZ-SNAPSHOT.jar #服务端jar包，如若需要自行修改，请将jar包放置在Server/app目录下，并修改此行
+      #- ./YD_JZ-SNAPSHOT.jar:/Ledger/app/YD_JZ-SNAPSHOT.jar #服务端jar包，如若需要自行修改，请将jar包放置在Server/app目录下，并修改此行
     ports:
       - 10670:8081 #左侧映射出去的端口号为服务端口号 默认10670
     depends_on:
@@ -71,7 +70,6 @@ services:
       - "10671:8083"
     volumes:
       - ./WebHook:/app/
-      #- ./WebHook/webhook-tools.py:/app/webhook.py
       - ./WebHook/webhook.py:/app/webhook.py
     environment:
       - LOG_FILE=/app/hook.log

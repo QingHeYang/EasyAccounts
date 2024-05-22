@@ -24,6 +24,12 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 git clone https://github.com/QingHeYang/EasyAccounts.git
 cd EasyAccounts
 ```
+如果你下载不下来，可以尝试使用码云的镜像  
+```shell
+git clone https://gitee.com/qingheyang/EasyAccounts.git
+cd EasyAccounts
+```
+
 
 **下载完成后，进入项目目录，搭建数据库目录**   
 !!!这步很重要，不要忽略  

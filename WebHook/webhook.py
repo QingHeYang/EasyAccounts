@@ -3,9 +3,6 @@ from pydantic import BaseModel
 import logging
 import requests
 
-# 你的 Java Spring Boot 接口地址
-JAVA_ENDPOINT = "http://192.168.50.226:10672/EasyAccounts/webhook"
-
 app = FastAPI()
 
 # 配置日志
@@ -31,7 +28,6 @@ async def handle_webhook(file: UploadFile = File(...), file_name: str = Form(...
         elif file_type == "screen_excel":
             result = await handleScreenExcelBackUp(file_content, file_name)
         
-        await send_webhook(file_content, file_name, file_type)
         logger.info(result)
         
         return {"status": "ok", "result": result}
@@ -64,14 +60,3 @@ async def save_file_locally(file: UploadFile, file_path: str):
     except Exception as e:
         logger.error(f"Failed to save file {file.filename} to {file_path}: {str(e)}")
 
-
-
-async def send_webhook(file: bytes, file_name: str, file_type: str):
-    try:
-        files = {"file": (file_name, file)}
-        data = {"file_type": file_type}
-        response = requests.post(JAVA_ENDPOINT, files=files, data=data)
-        response.raise_for_status()
-        logger.info(f"Webhook sent successfully. Response: {response.text}")
-    except Exception as e:
-        logger.error(f"Failed to send webhook: {str(e)}")

@@ -30,7 +30,7 @@ services:
     container_name: easy_accounts_nginx
     image: 775495797/easyaccounts-nginx:latest
     ports:
-      - "71:80"
+      - "10669:80"
     environment:
       - API_BASE_URL=http://ip:10670 #此处务必填写Server 的ip地址与端口号 ，见59行
     volumes:

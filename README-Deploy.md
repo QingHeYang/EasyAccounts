@@ -4,10 +4,7 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 特色功能有，生成Excel账单，定时备份数据库、账单数据  
 | 项目部署 ｜ [功能介绍](./README.md) |  
 
-<video width="320" height="240" controls>
-  <source src="https://b23.tv/XzEXFDT" type="video/mp4">
-</video>
-
+这是部署的B站视频地址：[【开源记账软件 EasyAccounts 部署教程-哔哩哔哩】 ](https://b23.tv/a09YbJa)
  
 ## 项目说明  
 该项目源自2021年10月，起初只是因为类似网易有钱之类的账单App下架，家人没有的用了，所以决定自己开发一款记账软件，详情不另做说明  

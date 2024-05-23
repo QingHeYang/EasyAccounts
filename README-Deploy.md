@@ -13,7 +13,7 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 ### 项目架构  
 项目采用前后端分离  
 - 后端: Java Spring Boot
-- 数据库： MariaDB
+- 数据库： Mysql
 - 前端：VUE
 - 部署：Docker/Docker-Compose
 

@@ -34,11 +34,21 @@ cd EasyAccounts
 
 
 **下载完成后，进入项目目录，搭建数据库目录**   
-!!!这步很重要，不要忽略  
+**这步很重要，不要忽略**  
 ```shell
 mkdir -p Database/init
 cp Database/base_sql/yd_jz_base.sql Database/init/yd_jz_base.sql
 ```
+
+Tips：补救措施
+> 如果**上一步没有**做复制数据库进行初始化，请做如下操作：  
+> ```shell  
+> #首先停掉compose
+> docker-compose down
+> #删除数据库数据
+> sudo rm -rf Database/data  
+> ```
+> 然后执行上一步复制数据库命令
 
 搭建完后的目录可以看到如下文件  
 ```shell
@@ -158,10 +168,16 @@ networks:
 1. 推荐使用Compose启动项目  
 ```shell
 docker-compose up -d
-```
+```  
+> 如果你在中国大陆，可能存在拉不下镜像的情况，这里我提供里阿里云的镜像compose文件  
+> ```shell
+> docker-compose -f docker-compose-chinese.yml up -d
+> ``` 
+> 如果你有条件使用梯子等工具，可以使用原始的compose文件，速度会更快，而且阿里云镜像这块我可能更新不够及时  
+
 2. 如果不使用Compose，可以使用Docker启动项目  
 ```shell
-chmod u+x start-easyaccounts.sh
+sudo chmod u+x start-easyaccounts.sh
 ./start-easyaccounts.sh
 ```
 3. 根据bash脚本，自行启动项目  

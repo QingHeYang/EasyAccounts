@@ -28,7 +28,7 @@ services:
   nginx:
     restart: always
     container_name: easy_accounts_nginx
-    image: registry.cn-hangzhou.aliyuncs.com/easyaccounts/easyaccounts-nginx:latest #此处使用阿里云镜像
+    image: registry.cn-beijing.aliyuncs.com/easyaccounts/easyaccounts-nginx:latest #此处使用阿里云镜像
     ports:
       - "10669:80"
     environment:
@@ -45,7 +45,7 @@ services:
   server:
     restart: always
     container_name: easy_accounts_server
-    image: registry.cn-hangzhou.aliyuncs.com/easyaccounts/easyaccounts-server:latest #此处使用阿里云镜像
+    image: registry.cn-beijing.aliyuncs.com/easyaccounts/easyaccounts-server:latest #此处使用阿里云镜像
     environment:
       - DB_PASSWORD=easy_accounts #数据库密码,默认easy_accounts
       - SQL_BACKUP_TIME=00 00 22 * * ? # SQL备份时间 corn表达式,默认每天晚上10点
@@ -64,7 +64,7 @@ services:
       - easy_accounts_net
   
   webhook:
-    image: registry.cn-hangzhou.aliyuncs.com/easyaccounts/easyaccounts-webhook:latest #此处使用阿里云镜像
+    image: registry.cn-beijing.aliyuncs.com/easyaccounts/easyaccounts-webhook:latest #此处使用阿里云镜像
     container_name: easy_accounts_webhook
     ports:
       - "10671:8083"

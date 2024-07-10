@@ -1,6 +1,7 @@
 WebHook/__pycache__
 *.log
 WebHook/webhook-tools.py
+WebHook/webhook-email.py
 
 *.jar
 *.xls

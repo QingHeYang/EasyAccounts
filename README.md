@@ -14,7 +14,7 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 |  [项目部署](./README-Deploy.md) ｜ 功能介绍 |    
 
 ## 功能  
-使用功能详见：  [【开源记账软件 EasyAccounts 部署教程-哔哩哔哩】 ](https://b23.tv/a09YbJa)  
+使用功能详见：  [【开源记账软件 EasyAccounts 使用教程-哔哩哔哩】 ](https://b23.tv/BV1Ds421w78S)  
 截图等详见： [关于我写的个人记账软件方案 - 四点不在线的小能猫的文章 - 知乎](https://zhuanlan.zhihu.com/p/645208377)
 
 项目主体功能是基于账户的记账，所有的金额都是基于账户来进行的。  

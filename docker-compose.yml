@@ -73,7 +73,7 @@ services:
     volumes:
       - ./WebHook:/app/
       #- ./WebHook/webhook.py:/app/webhook.py            #如果要自行处理文件，则映射该文件
-      #- ./WebHook/webhook-email.py:/app/webhook.py     #如需发送邮件服务，请解开此行注释，并填写下方的环境变量
+      - ./WebHook/webhook-email.py:/app/webhook.py     #如需发送邮件服务，请解开此行注释，并填写下方的环境变量
     environment:
       - LOG_FILE=/app/hook.log
       - SEND_SQL_BACKUP=True                  # 是否发送SQL备份文件,默认True

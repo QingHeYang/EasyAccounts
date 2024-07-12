@@ -12,7 +12,7 @@ webhook:
     volumes:
       - ./WebHook:/app/
       #- ./WebHook/webhook.py:/app/webhook.py           #如果要自行处理文件，则取消这行注释，映射该文件，则下方的环境变量无效
-      #- ./WebHook/webhook-email.py:/app/webhook.py     #如需修改发送邮件服务，请解开此行注释
+      - ./WebHook/webhook-email.py:/app/webhook.py     #如需修改发送邮件服务，请解开此行注释
     environment:
       - LOG_FILE=/app/hook.log
       - SEND_SQL_BACKUP=True                  # 是否发送SQL备份文件,默认True
@@ -38,6 +38,7 @@ webhook:
 此类的主要功能是提供一个示例，用于展示如何使用WebHook功能，提供了一个保存文件的工具类，并未实现具体发送功能。  
 
 ### webhook-email.py  
+默认使用的是该文件进行的发送邮件
 此类是发送邮件的具体实现，使用了`email`模块，需要配置邮件服务器的相关信息。  
 在 docker-compose.yml 中配置了邮件服务器的相关信息，如下：  
 ```yaml
@@ -75,7 +76,7 @@ Outlook邮箱：
     volumes:
       - ./WebHook:/app/
       #- ./WebHook/webhook.py:/app/webhook.py           #如果要自行处理文件，则取消这行注释，映射该文件，则下方的环境变量无效
-      #- ./WebHook/webhook-email.py:/app/webhook.py     #如需修改发送邮件服务，请解开此行注释
+      - ./WebHook/webhook-email.py:/app/webhook.py     #如需修改发送邮件服务，请解开此行注释
 ```  
 开发注意事项：  
 Docker容器内的环境包只有如下内容：  

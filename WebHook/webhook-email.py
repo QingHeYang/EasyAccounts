@@ -40,42 +40,34 @@ async def handle_webhook(file: UploadFile = File(...), file_name: str = Form(...
 
 
 
-
 async def send_email_with_attachment(file_content: bytes, file_name: str, file_type: str):
     logger.info(f"发送邮件名称为： {file_name} 收件人列表为： {SMTP_TO_LIST}")
-
     msg = MIMEMultipart()
-    if file_type == "sql" and SEND_SQL_BACKUP=='True':
-        msg['Subject'] = 'SQL 备份日志，备份文件名：' + file_name
-        body = MIMEText(f'账单SQL备份（{file_name}）。记得保存好，以防不时之需', 'plain')
-    elif file_type == "month_excel" and SEND_EXCEL=='True':
-        msg['Subject'] = file_name+ ' 月度 Excel 已生成，请查收'
-        body = MIMEText(f'月度账单 Excel({file_name}) 已生成，请查收', 'plain')
-    elif file_type == "analysis_excel" and SEND_EXCEL=='True':
-        msg['Subject'] = file_name+ ' 财务分析 Excel 已生成，请查收'
-        body = MIMEText(f'财务分析 Excel({file_name}) 已生成，请查收', 'plain')
-    elif file_type == "screen_excel" and SEND_EXCEL=='True':
-        msg['Subject'] = file_name+ ' 筛选账单 Excel 已生成，请查收'
-        body = MIMEText(f'筛选账单 Excel({file_name}) 已生成，请查收', 'plain')
 
-    if body is None:
-        return "用户选择不发送邮件"
-    else:
-        # 创建 MIME 多部分消息对象
-        msg['From'] = SMTP_FROM
-        msg['To'] = SMTP_TO_LIST
+    # 依据文件类型设置邮件主题和正文
+    if file_type == "month_excel" and SEND_EXCEL == 'True':
+        msg['Subject'] = f'{file_name} 月度 Excel 已生成，请查收'
+        body = MIMEText(f'{file_name} 已生成，请查收。', 'plain')
         msg.attach(body)
-        # 邮件正文
-        file_name = file_name.replace(' ', '')
-        part = MIMEBase('application', 'octet-stream')
-        part.set_payload(file_content)
-        encoders.encode_base64(part)
-        part.add_header('Content-Disposition', 'attachment', filename=file_name)
-        part.add_header('Content-Type', 'application/octet-stream', name=file_name)
-        msg.attach(part)
 
-    # 连接到 SMTP 服务器
-    with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+    # 设置发件人、收件人
+    msg['From'] = SMTP_FROM
+    msg['To'] = SMTP_TO_LIST
+
+    # 邮件附件处理
+    file_name = file_name.replace(' ', '')
+    part = MIMEBase('application', 'octet-stream')
+    part.set_payload(file_content)
+    encoders.encode_base64(part)
+    part.add_header('Content-Disposition', 'attachment', filename=file_name)
+    part.add_header('Content-Type', 'application/octet-stream', name=file_name)
+    msg.attach(part)
+
+    # 连接到 SMTP 服务器并发送邮件
+    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+        server.ehlo()  # 与服务器打招呼
+        server.starttls()  # 启用TLS
+        server.ehlo()  # 重新与服务器打招呼
         server.login(SMTP_FROM, SMTP_PASSWORD)
         server.sendmail(SMTP_FROM, SMTP_TO_LIST, msg.as_string())
     

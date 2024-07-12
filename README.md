@@ -49,72 +49,9 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 Excel生成后，会自动备份到Resource/excel目录下，对应上面三个账单的文件夹。  
 
 ### WebHook功能  
-WebHook是我在开源之前临时突击的功能。  
-主要是不知道使用者们有什么备份习惯。  
-```Python
-@app.post("/webhook")
-async def handle_webhook(file: UploadFile = File(...), file_name: str = Form(...), file_type: str = Form(...)):
-    logger.info(f"Received request with file_name: {file_name} and file_type: {file_type}")
-    try:
-        file_content = await file.read()
-        if file_type == "sql":
-            result = await handleMySqlBackUp(file_content, file_name)
-        elif file_type == "analysis_excel":
-            result = await handleMonthExcelBackUp(file_content, file_name)
-        elif file_type == "month_excel":
-            result = await handleMonthExcelBackUp(file_content, file_name)
-        elif file_type == "screen_excel":
-            result = await handleScreenExcelBackUp(file_content, file_name)
-        
-        await send_webhook(file_content, file_name, file_type)
-        logger.info(result)
-        
-        return {"status": "ok", "result": result}
-    except Exception as e:
-        logger.error(f"An error occurred: {str(e)}")
-        return {"status": "error", "message": str(e)}
+WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-compose.yml中配置。  
+具体使用方法见：[WebHook使用说明](./WebHook/README.md)
 
-# 处理备份数据库的逻辑
-async def handleMySqlBackUp(file_content: bytes, file_name: str):
-    logger.info(f"Handling MySQL backup with file_name: {file_name}")
-    return f"Handled MySQL backup for file_name: {file_name}"
-
-# 处理备份月度账单的逻辑
-async def handleMonthExcelBackUp(file_content: bytes, file_name: str):
-    logger.info(f"Handling monthly Excel backup with file_name: {file_name}")
-    return f"Handled monthly Excel backup for file_name: {file_name}"
-
-# 处理备份筛选账单的逻辑
-async def handleScreenExcelBackUp(file_content: bytes, file_name: str):
-    logger.info(f"Handling screen Excel backup with file_name: {file_name}")
-    return f"Handled screen Excel backup for file_name: {file_name}"
-
-# 工具方法: 将文件保存到本地
-async def save_file_locally(file: UploadFile, file_path: str):
-    try:
-        async with aiofiles.open(file_path, 'wb') as out_file:
-            content = await file.read()
-            await out_file.write(content)
-        logger.info(f"File {file.filename} saved to {file_path}")
-    except Exception as e:
-        logger.error(f"Failed to save file {file.filename} to {file_path}: {str(e)}")
-
-
-
-async def send_webhook(file: bytes, file_name: str, file_type: str):
-    try:
-        files = {"file": (file_name, file)}
-        data = {"file_type": file_type}
-        response = requests.post(JAVA_ENDPOINT, files=files, data=data)
-        response.raise_for_status()
-        logger.info(f"Webhook sent successfully. Response: {response.text}")
-    except Exception as e:
-        logger.error(f"Failed to send webhook: {str(e)}")
-```
-
-这段代码是一个收到文件后的处理逻辑，主要是备份数据库和Excel文件。  
-你可以再python中使用requests库，发送文件到这个接口，然后这个接口会处理你发送的文件。  
-我自己用的阿里云OSS备份，用了阿里云的Email服务，但是注册阿里云很多人不会，所以我干脆就开放了WebHook功能。
 
 ## 注意  
 强烈建议尝试实现一下WebHook功能，这样你的数据就不会丢失了。  

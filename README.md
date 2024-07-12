@@ -48,15 +48,25 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 备份的文件会存放在Resource/sql目录下，文件名为日期.sql。  
 Excel生成后，会自动备份到Resource/excel目录下，对应上面三个账单的文件夹。  
 
-### WebHook功能  
+### WebHook功能(发送邮件)  
 WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-compose.yml中配置。  
-具体使用方法见：[WebHook使用说明](./WebHook/README.md)
-
+具体使用方法见：[WebHook使用说明](./WebHook/README.md)  
+配置好发送邮件功能后，就可以在手机上接收excel文件了，效果如下：  
+Excel文件：  
+<img src="./image/Email_get.png" width="45%" />
+SQL文件：
+<img src="./image/Email_sql.png" width="45%" />
+  
+### 其他功能  
+1. Swagger接口文档，可以查看接口文档，支持自定义开发前端。  
+![Swagger接口文档](./image/Swagger.png)  
+2. Nginx提供生成文件的下载服务，可以直接下载生成的文件  
+![Nginx文件下载](./image/Nginx.png)
+  
+上述两个地址详见：[项目部署-项目访问](https://github.com/QingHeYang/EasyAccounts/blob/main/README-Deploy.md#%E9%A1%B9%E7%9B%AE%E6%9C%8D%E5%8A%A1%E8%AF%B4%E6%98%8E)  
 
 ## 注意  
-强烈建议尝试实现一下WebHook功能，这样你的数据就不会丢失了。  
 如果你不会写代码也无所谓，但是一定要记得定时备份数据库文件、Excel文件。  
-如果你不会写代码，我也可以帮你写。  
 
 还有就是要注意，项目是没有使用任何Auth鉴权的，所以一定要注意项目的安全性。
 我是不推荐暴露端口到公网的，如果你要暴露端口到公网，一定要注意安全性。  
@@ -64,4 +74,4 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
 基于上述原则，后需我大概率不会增加登录功能，因为没有任何系统是安全的，何况是个人开发者的项目。  
 
 ## 部署
-参阅部署文档  
+参阅部署文档  : [项目部署](./README-Deploy.md)

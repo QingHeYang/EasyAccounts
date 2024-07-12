@@ -104,21 +104,26 @@ sudo chmod u+x start-easyaccounts.sh
  (base) root@tesla-t4:~/EasyAccounts# tree -L 2
  .
 ├── Database
-│   ├── data #数据库数据,不要修改,自动创建
-│   └── init #数据库初始化文件
-├── docker-compose.yml
+│   ├── data                      # 数据库数据,不要修改,自动创建
+│   └── init                      # 数据库初始化文件
+├── docker-compose-chinese.yml    # 阿里云镜像compose文件
+├── docker-compose.yml            # docker hub compose文件
 ├── LICENSE
 ├── README.md
-├── Resource #资源文件目录
-│   ├── excel #excel文件目录，自动生成的目录
-│   └── sql #sql备份文件目录，自动生成的目录
+├── Resource                      # 资源文件目录
+│   ├── excel                     # excel文件目录，自动生成的目录
+│   └── sql                       # sql备份文件目录，自动生成的目录
 ├── Server
-│   └── logs #日志文件目录
-├── start-easyaccounts.sh
+│   └── logs                      # 日志文件目录
+├── start-easyaccounts-chinese.sh # docker-client阿里云镜像启动脚本
+├── start-easyaccounts.sh         # docker-client启动脚本
+├── update-docker-chinese.sh      # 阿里云镜像更新脚本
+├── update-docker.sh              # docker hub 更新脚本
 └── WebHook
-    ├── hook.log #Webhook日志文件
-    ├── __pycache__ #Webhook缓存文件,自动生成的目录，不要修改
-    └── webhook.py
+    ├── hook.log                  # Webhook日志文件
+    ├── __pycache__               # Webhook缓存文件,自动生成的目录，不要修改
+    ├── webhook-email.py          # Webhook邮件发送脚本
+    └── webhook.py                # Webhook脚本
 ```
 
 ### 项目服务说明

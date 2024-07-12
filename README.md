@@ -19,10 +19,20 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 
 项目主体功能是基于账户的记账，所有的金额都是基于账户来进行的。  
 ## 部分截图  
-<img src="./image/Home.png" width="30%" />
-<img src="./image/Flow.png" width="30%" />
-<img src="./image/Insert.png" width="30%" />  
-<img src="./image/Home.png" width="30%" />
+<table>
+  <tr width="70%">
+    <td><img src="./image/Home.png" width="100%" /></td>
+    <td><img src="./image/Flow.png" width="100%" /></td>
+    <td><img src="./image/Insert.png" width="100%" /></td>
+    <td><img src="./image/Insert_note.png" width="100%" /></td>
+  </tr>
+    <tr width="70%">
+    <td><img src="./image/Analysis.png" width="100%" /></td>
+    <td><img src="./image/Screen.png" width="100%" /></td>
+    <td><img src="./image/Action.png" width="100%" /></td>
+    <td><img src="./image/Type.png" width="100%" /></td>
+  </tr>
+</table>
 
 
 
@@ -79,5 +89,20 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
 
 基于上述原则，后需我大概率不会增加登录功能，因为没有任何系统是安全的，何况是个人开发者的项目。  
 
-## 部署
-参阅部署文档  : [项目部署](./README-Deploy.md)
+## 部署&更新
+参阅部署文档  : [项目部署](./README-Deploy.md)  
+
+## 结语  
+该项目会长期维护下去  
+如果该项目对你有帮助，欢迎Star，如果有问题，欢迎提issue。  
+维护一个项目不容易，如果你愿意支持一下，可以请我喝杯咖啡。  
+<table>
+  <tr width="70%">
+    <td>
+    <img src="./image/WeChat.jpg" width="70%" /> 
+    </td>
+    </td>
+    <td><img src="./image/Ali_pay.jpg" width="50%" />
+    </td>
+</tr>
+</table>

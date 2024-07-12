@@ -64,91 +64,8 @@ Tips：补救措施
 └── WebHook
     └── webhook.py #WebHook脚本
 ```
-### 配置项目
-compose文件如下：
-```yaml
-version: '3.8'
-
-services:
-
-  #数据库端，请勿分开部署Mysql与服务端，内部有网桥链接，分开部署会导致服务端无法连接数据库，请勿修改"db"服务的名称，否则会导致服务端无法连接数据库
-  db:   
-    restart: always
-    container_name: easy_accounts_db
-    image: mysql:8.0.31
-    ports:
-      - "10668:3306"
-    environment:
-      TZ: Asia/Shanghai
-      MYSQL_ROOT_PASSWORD: easy_accounts #数据库root密码，自行修改，修改完需要修改Server中的数据库密码
-      MYSQL_DATABASE: yd_jz #数据库名称，请勿修改
-    volumes:
-      - ./Database/data:/var/lib/mysql
-      - ./Database/init:/docker-entrypoint-initdb.d
-    command:
-      --default-authentication-plugin=mysql_native_password
-      --character-set-server=utf8mb4
-      --collation-server=utf8mb4_general_ci
-      --explicit_defaults_for_timestamp=true
-      --lower_case_table_names=1
-    networks:
-      - easy_accounts_net
-
-  nginx:
-    restart: always
-    container_name: easy_accounts_nginx
-    image: 775495797/easyaccounts-nginx:latest
-    ports:
-      - "10669:80"
-    environment:
-      - API_BASE_URL=http://ip:10670 #此处务必填写Server 的ip地址与端口号 ，见59行
-    volumes:
-      #- ./Web/dist:/usr/share/nginx/html #如若需要自行修改前端，请将前端放置在Web/dist目录下，并解开此行注释
-      #- ./Web/nginx/default.conf:/etc/nginx/conf.d/default.conf #如若需要自行修改nginx配置，请将配置文件放置在Web/nginx/default.conf目录下，并解开此行注释
-      - ./Resource:/usr/share/nginx/html/resources #资源文件目录，此文件夹提供一个下载功能
-    depends_on:
-      - server
-    networks:
-      - easy_accounts_net
-
-  server:
-    restart: always
-    container_name: easy_accounts_server
-    image: 775495797/easyaccounts-server:latest
-    environment:
-      - DB_PASSWORD=easy_accounts #数据库密码,默认easy_accounts
-      - SQL_BACKUP_TIME=00 00 22 * * ? # SQL备份时间 corn表达式,默认每天晚上10点
-    volumes:
-      - ./Resource/sql:/Ledger/backup #数据库备份文件目录
-      - ./Resource/excel/month:/Ledger/excel/month #excel 生成月度账单文件目录
-      - ./Resource/excel/screen:/Ledger/excel/screen #excel 生成筛选账单文件目录
-      - ./Server/logs:/Ledger/logs #日志文件目录
-      #- ./Server/config/:/Ledger/config #配置文件目录
-      #- ../EasyAccountsSource/Server/YD_JZ/target/YD_JZ-SNAPSHOT.jar:/Ledger/app/YD_JZ-SNAPSHOT.jar #服务端jar包，如若需要自行修改，请将jar包放置在Server/app目录下，并修改此行
-    ports:
-      - 10670:8081 #左侧映射出去的端口号为服务端口号 默认10670
-    depends_on:
-      - db
-    networks:
-      - easy_accounts_net
-  
-  webhook:
-    image: 775495797/easyaccounts-webhook:latest
-    container_name: easy_accounts_webhook
-    ports:
-      - "10671:8083"
-    volumes:
-      - ./WebHook:/app/
-      #- ./WebHook/webhook-tools.py:/app/webhook.py
-      - ./WebHook/webhook.py:/app/webhook.py
-    environment:
-      - LOG_FILE=/app/hook.log
-    networks:
-      - easy_accounts_net
-networks:
-  easy_accounts_net:
-
-```
+### 配置项目  
+详见docker-compose.yml文件:[docker-compose.yml](./docker-compose.yml)  
 必要的配置项有：
 - API_BASE_URL=http://ip:port #此处务必填写Server 的ip地址与端口号  
 因为项目是前后端分离的，前端需要知道后端的地址，所以需要填写后端的地址  
@@ -219,3 +136,12 @@ sudo chmod u+x start-easyaccounts.sh
 倘若你服务器出现错误，或者要重新部署，不要着急。  
 你是用最后一次保存备份的sql文件，放到DataBase/init 中，删掉DataBase/data中的所有文件，然后重启compose即可。  
 这就是为什么我强烈建议你定时保存备份的sql文件，因为这个文件可以让你的数据永远不会丢失。
+  
+## 项目更新  
+更新建议：  
+1. 备份数据库  
+2. 备份excel文件  
+3. `git pull`  
+4. 选择使用的compose文件，down  
+5. 执行对应的update升级脚本  
+6. 启动compose

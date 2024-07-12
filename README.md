@@ -18,6 +18,14 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 截图等详见： [关于我写的个人记账软件方案 - 四点不在线的小能猫的文章 - 知乎](https://zhuanlan.zhihu.com/p/645208377)
 
 项目主体功能是基于账户的记账，所有的金额都是基于账户来进行的。  
+## 部分截图  
+<img src="./image/Home.png" width="30%" />
+<img src="./image/Flow.png" width="30%" />
+<img src="./image/Insert.png" width="30%" />  
+<img src="./image/Home.png" width="30%" />
+
+
+
 
 ### 可以定义的操作有
 1. 账户：有金额、名称等选项。
@@ -51,17 +59,15 @@ Excel生成后，会自动备份到Resource/excel目录下，对应上面三个�
 ### WebHook功能(发送邮件)  
 WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-compose.yml中配置。  
 具体使用方法见：[WebHook使用说明](./WebHook/README.md)  
-配置好发送邮件功能后，就可以在手机上接收excel文件了，效果如下：  
-Excel文件：  
+配置好发送邮件功能后，就可以在手机上接收excel以及SQL文件了，效果如下：  
 <img src="./image/Email_get.png" width="45%" />
-SQL文件：
 <img src="./image/Email_sql.png" width="45%" />
   
 ### 其他功能  
 1. Swagger接口文档，可以查看接口文档，支持自定义开发前端。  
-![Swagger接口文档](./image/Swagger.png)  
+<img src="./image/Swagger.png" width="65%" />
 2. Nginx提供生成文件的下载服务，可以直接下载生成的文件  
-![Nginx文件下载](./image/Nginx.png)
+<img src="./image/Nginx.png" width="65%" />
   
 上述两个地址详见：[项目部署-项目访问](https://github.com/QingHeYang/EasyAccounts/blob/main/README-Deploy.md#%E9%A1%B9%E7%9B%AE%E6%9C%8D%E5%8A%A1%E8%AF%B4%E6%98%8E)  
 

@@ -86,6 +86,9 @@ pydantic==2.7.1
 Requests==2.32.2
 ```
 
+## 日志查看
+日志文件默认保存在`WebHook/hook.log`中。
+
 ## 注意事项  
 邮箱端口请使用TLS加密端口，不支持SSL加密。  
 日志文件默认保存在`/app/hook.log`中，可以通过`LOG_FILE`环境变量进行修改。  

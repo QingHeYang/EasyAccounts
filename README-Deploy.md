@@ -142,6 +142,10 @@ sudo chmod u+x start-easyaccounts.sh
 你是用最后一次保存备份的sql文件，放到DataBase/init 中，删掉DataBase/data中的所有文件，然后重启compose即可。  
 这就是为什么我强烈建议你定时保存备份的sql文件，因为这个文件可以让你的数据永远不会丢失。
   
+## 日志查看  
+- 服务端日志：Server/logs/  
+- WebHook日志：WebHook/hook.log
+
 ## 项目更新  
 更新建议：  
 1. 备份数据库  

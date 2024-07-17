@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 # 读取环境变量
 SMTP_SERVER = os.getenv('SMTP_SERVER', '')
-SMTP_PORT = int(os.getenv('SMTP_PORT', 0))
+SMTP_PORT = os.getenv('SMTP_PORT', '')
 SMTP_FROM = os.getenv('SMTP_MAIL', '')
 SMTP_PASSWORD = os.getenv('SMTP_PASSWORD', '')
 SMTP_TO_LIST = os.getenv('SMTP_TO_LIST', '')
@@ -47,6 +47,16 @@ async def send_email_with_attachment(file_content: bytes, file_name: str, file_t
     # 依据文件类型设置邮件主题和正文
     if file_type == "month_excel" and SEND_EXCEL == 'True':
         msg['Subject'] = f'{file_name} 月度 Excel 已生成，请查收'
+        body = MIMEText(f'{file_name} 已生成，请查收。', 'plain')
+        msg.attach(body)
+        
+    elif file_type == "screen_excel" and SEND_EXCEL == 'True':
+        msg['Subject'] = f'{file_name} 筛选账单 Excel 已生成，请查收'
+        body = MIMEText(f'{file_name} 已生成，请查收。', 'plain')
+        msg.attach(body)
+    
+    elif file_type == "analysis_excel" and SEND_EXCEL == 'True':
+        msg['Subject'] = f'{file_name} 财务分析 Excel 已生成，请查收'
         body = MIMEText(f'{file_name} 已生成，请查收。', 'plain')
         msg.attach(body)
 

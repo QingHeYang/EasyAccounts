@@ -75,6 +75,7 @@ services:
       #- ./WebHook/webhook.py:/app/webhook.py           #如果要自行处理文件，则取消这行注释，映射该文件，则下方的环境变量无效
       - ./WebHook/webhook-email.py:/app/webhook.py     #如需修改发送邮件服务，请解开此行注释
     environment:
+      - TZ=Asia/Shanghai
       - LOG_FILE=/app/hook.log
       - SEND_SQL_BACKUP=True                  # 是否发送SQL备份文件,默认True
       - SEND_EXCEL=True                       # 是否发送Excel文件，默认True

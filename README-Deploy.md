@@ -79,7 +79,9 @@ Tips：补救措施
 定制化开发（不建议自行开发）：
 - 如果需要自行修改前端，请将前端放置在Web/dist目录下，并解开此行注释
 - 如果需要自行修改nginx配置，请将配置文件放置在Web/nginx/default.conf目录下，并解开此行注释
-- 如果需要自行修改服务端jar包，请将jar包放置在Server/app目录下，并修改此行
+- 如果需要自行修改服务端jar包，请将jar包放置在Server/app目录下，并修改此行  
+
+> Tips: SQL备份时间corn表达式，可以参考这个网站：[在线corn表达式生成](https://www.bejson.com/othertools/cron/)  
 
 ### 启动项目  
 1. 推荐使用Compose启动项目  

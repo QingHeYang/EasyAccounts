@@ -33,24 +33,88 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 截图等详见： [关于我写的个人记账软件方案 - 四点不在线的小能猫的文章 - 知乎](https://zhuanlan.zhihu.com/p/645208377)
 
 项目主体功能是基于账户的记账，所有的金额都是基于账户来进行的。  
-## 部分截图  
+### 部分截图  
 <table>
   <tr width="70%">
-    <td><img src="./image/Home.png" width="100%" /></td>
-    <td><img src="./image/Flow.png" width="100%" /></td>
-    <td><img src="./image/Insert.png" width="100%" /></td>
-    <td><img src="./image/Insert_note.png" width="100%" /></td>
+    <td>
+      <img src="./image/Home.png" width="100%" />
+      <p align="center">首页界面</p>
+    </td>
+    <td>
+      <img src="./image/Flow.png" width="100%" />
+      <p align="center">流水界面</p>
+    </td>
+    <td>
+      <img src="./image/Insert.png" width="100%" />
+      <p align="center">新增流水</p>
+    </td>
+    <td>
+      <img src="./image/Insert_note.png" width="100%" />
+      <p align="center">流水确认</p>
+    </td>
   </tr>
-    <tr width="70%">
-    <td><img src="./image/Analysis.png" width="100%" /></td>
-    <td><img src="./image/Screen.png" width="100%" /></td>
-    <td><img src="./image/Action.png" width="100%" /></td>
-    <td><img src="./image/Type.png" width="100%" /></td>
+  <tr width="70%">
+    <td>
+      <img src="./image/Analysis.png" width="100%" />
+      <p align="center">财务分析</p>
+    </td>
+    <td>
+      <img src="./image/Screen.png" width="100%" />
+      <p align="center">筛选界面</p>
+    </td>
+    <td>
+      <img src="./image/Screen_more.png" width="100%" />
+      <p align="center">更多筛选</p>
+    </td>
+    <td>
+      <img src="./image/Type.png" width="100%" />
+      <p align="center">分类界面</p>
+    </td>
   </tr>
+  <tr width="70%">
+    <td>
+      <img src="./image/Action.png" width="100%" />
+      <p align="center">收支操作</p>
+    </td>
+    <td>
+      <img src="./image/Add_Account.png" width="100%" />
+      <p align="center">添加账号</p>
+    </td>
+    <td>
+      <img src="./image/Add_template.png" width="100%" />
+      <p align="center">新增模板</p>
+    </td>
+    <td>
+      <img src="./image/Choose_template.png" width="100%" />
+      <p align="center">选择模板</p>
+    </td>
+  </tr>
+
 </table>
 
-
-
+<table>
+  <tr width="70%">
+    <td>
+      <img src="./image/Swagger_info.png" width="100%" />
+      <p align="center">Swagger 文档</p>
+    </td>
+    <td>
+      <img src="./image/Nginx_info.png" width="100%" />
+      <p align="center">Nginx 文件下载</p>
+    </td>
+  </tr>
+   <tr width="70%">
+    <td>
+      <img src="./image/Email_info.png" width="100%" />
+      <p align="center">Email 推送</p>
+    </td>
+    <td>
+      <img src="./image/Excel_info.png" width="100%" />
+      <p align="center">Excel 生成</p>
+    </td>
+   
+  </tr>
+</table>
 
 ### 可以定义的操作有
 1. 账户：有金额、名称等选项。

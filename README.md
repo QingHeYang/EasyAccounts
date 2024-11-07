@@ -5,8 +5,15 @@
 EasyAccounts是一款中文记账软件，主要的作用是简易记账  
 基础功能有，每月流水记账，快速记账，筛选，分析  
 特色功能有，生成Excel账单，定时备份数据库、账单数据  
-部署要求使用Docker部署，平台要求windows & ubuntu  
+部署要求使用Docker部署  
 |  [项目部署](./README-Deploy.md) ｜ 功能介绍 | 
+
+### 支持平台  
+* Ubuntu&Debain  
+* Windows  
+* Mac OS  
+* 飞牛私有云 Fnos
+
 
 ---
 ### Update plan：  

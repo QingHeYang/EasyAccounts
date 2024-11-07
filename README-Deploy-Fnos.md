@@ -35,7 +35,7 @@
 ```
 sudo find / -type d -name "EasyAccounts-main" 2>/dev/null 
 ```  
-执行过程会要登录密码
+执行过程会要登录密码  
 <img src="./image/Fnos/fnos-find.png" width="75%" />  
 
 进入到最后一个`/vol1/1000/EasyAccounts-main`中，前几个也同样可以进去，但是保存位置确实在最后一个  

@@ -24,7 +24,7 @@
 <img src="./image/Fnos/fnos-upload.png" width="75%" />  
 
 2. 上传后结果  
-<img src="./image/Fnos/fnos-folder-finish.png" width="75%" />  
+<img src="./image/Fnos/fnos-upload-finish.png" width="75%" />  
 
 ## 数据库文件提权  
 ### 去Fnos后台登录  

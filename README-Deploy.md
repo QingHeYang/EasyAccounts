@@ -4,14 +4,16 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 特色功能有，生成Excel账单，定时备份数据库、账单数据  
 | 项目部署 ｜ [功能介绍](./README.md) |  
 
-这是部署的B站视频地址：[【开源记账软件 EasyAccounts 部署教程-哔哩哔哩】 ](https://b23.tv/a09YbJa)
+以下是对应平台的部署教程：  
+* Windows平台：[【开源记账软件 EasyAccounts  Windows部署教程】](https://b23.tv/BV1mBmBY7Eg8)
+* Ubuntu平台：[【开源记账软件 EasyAccounts Ubuntu部署教程-哔哩哔哩】 ](https://b23.tv/a09YbJa)  
+* 飞牛云Fnos平台：  [【开源记账软件 EasyAccounts  飞牛云 Fnos部署教程】](https://b23.tv/BV1mBmBY7Exu)  
+[飞牛私有云部署文档](./README-Deploy-Fnos.md)
  
 ## 项目说明  
 该项目源自2021年10月，起初只是因为类似网易有钱之类的账单App下架，家人没有的用了，所以决定自己开发一款记账软件，详情不另做说明  
 ## 项目部署要求  
 该项目可以在windows或者ubuntu上进行部署，已经测试通过  
-[飞牛私有云部署文档](./README-Deploy-Fnos.md)
-飞牛云部署文档需要搭配本篇进行部署  
 
 ### 项目架构  
 项目采用前后端分离  
@@ -20,10 +22,11 @@ EasyAccounts是一款中文记账软件，主要的作用是简易记账
 - 前端：VUE
 - 部署：Docker/Docker-Compose
 
-### 项目部署  
+## 项目部署  
+下面内容针对Ubuntu系统  
+其余平台部署，请按照上面视频教程进行操作
 ### 环境准备
 安装Docker和Docker-Compose，具体安装方法请自行搜索，不再赘述，可以只部署Docker，例如群晖小伙伴可能没有compose  
-Windows用户 请下载Docker Desktop，该应用自动安装docker 以及docker compose命令
 
 ### 下载项目代码  
 ```shell

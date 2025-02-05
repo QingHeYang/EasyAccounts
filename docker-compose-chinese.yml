@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
 
-  #数据库端，请勿分开部署Mysql与服务端，内部有网桥链接，分开部署会导致服务端无法连接数据库，请勿修改"db"服务的名称，否则会导致服务端无法连接数据库
+  # 数据库端，如若需要外部部署数据库，请自行部署，服务端使用数据库版本为8.0.31
+  # 请勿修改"db"服务的名称，否则会导致服务端无法连接数据库
   db:   
     restart: always
     container_name: easy_accounts_db
@@ -11,8 +12,8 @@ services:
       - "10668:3306"
     environment:
       TZ: Asia/Shanghai
-      MYSQL_ROOT_PASSWORD: easy_accounts #数据库root密码，自行修改，修改完需要修改Server中的数据库密码
-      MYSQL_DATABASE: yd_jz #数据库名称，请勿修改
+      MYSQL_ROOT_PASSWORD: easy_accounts      #数据库root密码，自行修改，修改完需要修改Server中的数据库密码
+      MYSQL_DATABASE: yd_jz                   #数据库名称，请勿修改
     volumes:
       - ./Database/data:/var/lib/mysql
       - ./Database/init:/docker-entrypoint-initdb.d
@@ -28,15 +29,16 @@ services:
   nginx:
     restart: always
     container_name: easy_accounts_nginx
-    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-nginx:latest #此处使用阿里云镜像
+    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-nginx:latest   #此处使用阿里云镜像
     ports:
       - "10669:80"
     environment:
-      - API_BASE_URL=http://ip:10670 #此处务必填写Server 的ip地址与端口号 ，见59行
+      #-------------------！！必填！！-------------------
+      - API_BASE_URL=http://ip:10670  #此处务必填写Server 的ip地址与端口号 ，见59行
     volumes:
-      #- ./Web/dist:/usr/share/nginx/html #如若需要自行修改前端，请将前端放置在Web/dist目录下，并解开此行注释
-      #- ./Web/nginx/default.conf:/etc/nginx/conf.d/default.conf #如若需要自行修改nginx配置，请将配置文件放置在Web/nginx/default.conf目录下，并解开此行注释
-      - ./Resource:/usr/share/nginx/html/resources #资源文件目录，此文件夹提供一个下载功能
+      #- ./Web/dist:/usr/share/nginx/html                             #如若需要自行修改前端，请将前端放置在Web/dist目录下，并解开此行注释
+      #- ./Web/nginx/default.conf:/etc/nginx/conf.d/default.conf      #如若需要自行修改nginx配置，请将配置文件放置在Web/nginx/default.conf目录下，并解开此行注释
+      - ./Resource:/usr/share/nginx/html/resources                    #资源文件目录，此文件夹提供一个下载功能
     depends_on:
       - server
     networks:
@@ -46,34 +48,45 @@ services:
     restart: always
     container_name: easy_accounts_server
           
-    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-server:latest #此处使用阿里云镜像
+    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-server:latest # 此处使用阿里云镜像
     environment:
-      - DB_PASSWORD=easy_accounts #数据库密码,默认easy_accounts
-      - SQL_BACKUP_TIME=00 00 22 * * ? # SQL备份时间 corn表达式,默认每天晚上10点
+      #-------------------以下为服务端数据库环境变量，如果不需要外部部署数据库，请勿修改-------------------
+      #- MYSQL_HOST=192.168.10.1                # 解开注释则需要填写数据库地址，否则默认为db
+      #- MYSQL_PORT=3306                        # 解开注释则需要填写数据库端口号，否则默认为3306
+      #- MYSQL_USERNAME=root                    # 解开注释则需要填写数据库用户名，否则默认为root
+
+      - DB_PASSWORD=easy_accounts               # 数据库密码,默认easy_accounts，如果使用外部数据库，请修改此处
+      - SQL_BACKUP_TIME=00 00 22 * * ?          # SQL备份时间 corn表达式,默认每天晚上10点
+
+      #-------------------以下为服务端登录功能环境变量-------------------
+      - ENABLE_LOGIN=true                       # 是否启用登录功能，默认true 
+      - EXPIRED_TIME=30                         # 登录过期时间，默认30分钟，单位分钟
     volumes:
-      - ./Resource/sql:/Ledger/backup #数据库备份文件目录
-      - ./Resource/excel/month:/Ledger/excel/month #excel 生成月度账单文件目录
-      - ./Resource/excel/screen:/Ledger/excel/screen #excel 生成筛选账单文件目录
-      - ./Resource/excel/month:/Ledger/excel/analysis #excel 生成筛选账单文件目录
-      - ./Server/logs:/Ledger/logs #日志文件目录
-      #- ./YD_JZ-SNAPSHOT.jar:/Ledger/app/YD_JZ-SNAPSHOT.jar #服务端jar包，如若需要自行修改，请将jar包放置在Server/app目录下，并修改此行
+      - ./Resource/sql:/Ledger/backup                           # 数据库备份文件目录
+      - ./Resource/excel/month:/Ledger/excel/month              # excel 生成月度账单文件目录
+      - ./Resource/excel/screen:/Ledger/excel/screen            # excel 生成筛选账单文件目录
+      - ./Resource/excel/month:/Ledger/excel/analysis           # excel 生成筛选账单文件目录
+      - ./Server/logs:/Ledger/logs                              # 日志文件目录
+      - ./Server/auth:/Ledger/auth                              # 登录认证文件目录,需要映射，否则重启后会丢失用户名密码 
+                                                                # 重置用户名密码请删除auth文件夹下的sercret.key文件
+      #- ./YD_JZ-SNAPSHOT.jar:/Ledger/app/YD_JZ-SNAPSHOT.jar    # 服务端jar包，如若需要自行修改，请将jar包放置在Server/app目录下，并修改此行
     ports:
-      - 10670:8081 #左侧映射出去的端口号为服务端口号 默认10670
+      - 10670:8081                               # 左侧映射出去的端口号为服务端口号 默认10670
     depends_on:
       - db
     networks:
       - easy_accounts_net
   
   webhook:
-    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-webhook:latest #此处使用阿里云镜像
+    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-webhook:latest   # 此处使用阿里云镜像
     container_name: easy_accounts_webhook
     restart: always
     ports:
       - "10671:8083"
     volumes:
       - ./WebHook:/app/
-      #- ./WebHook/webhook.py:/app/webhook.py           #如果要自行处理文件，则取消这行注释，映射该文件，则下方的环境变量无效
-      - ./WebHook/webhook-email.py:/app/webhook.py     #如需修改发送邮件服务，请解开此行注释
+      #- ./WebHook/webhook.py:/app/webhook.py           # 如果要自行处理文件，则取消这行注释，映射该文件，则下方的环境变量无效
+      - ./WebHook/webhook-email.py:/app/webhook.py      # 如需修改发送邮件服务，请解开此行注释
     environment:
       - TZ=Asia/Shanghai
       - LOG_FILE=/app/hook.log

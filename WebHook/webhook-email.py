@@ -25,6 +25,14 @@ app = FastAPI()
 
 @app.post("/webhook")
 async def handle_webhook(file: UploadFile = File(...), file_name: str = Form(...), file_type: str = Form(...)):
+    if(file_type == "sql_backup" and SEND_SQL_BACKUP == 'False'):
+        return {"status": "ok", "result": "SQL 备份邮件发送功能已关闭"}
+    if(file_type == "month_excel" and SEND_EXCEL == 'False'):
+        return {"status": "ok", "result": "月度 Excel 发送功能已关闭"}
+    if(file_type == "screen_excel" and SEND_EXCEL == 'False'):
+        return {"status": "ok", "result": "筛选账单 Excel 发送功能已关闭"}
+    if(file_type == "analysis_excel" and SEND_EXCEL == 'False'):
+        return {"status": "ok", "result": "财务分析 Excel 发送功能已关闭"}
     if not await check_smtp_info():
         return {"status": "error", "message": "SMTP 信息不完整，请设置环境变量"}
     else:
@@ -36,7 +44,7 @@ async def handle_webhook(file: UploadFile = File(...), file_name: str = Form(...
             return {"status": "ok", "result": result}
         except Exception as e:
             logger.error(f"发生错误: {str(e)}")
-            return {"status": "error", "message": str(e)}
+            return {"status": "ok", "result": "请检查是否收到邮件"}
 
 
 
@@ -61,9 +69,10 @@ async def send_email_with_attachment(file_content: bytes, file_name: str, file_t
         logger.info("用户选择不发送邮件")
         return "用户选择不发送邮件"
     else:
+        recipient_list = [email.strip() for email in SMTP_TO_LIST.split(",")]
         # 设置发件人、收件人
         msg['From'] = SMTP_FROM
-        msg['To'] = SMTP_TO_LIST
+        msg['To'] = ", ".join(recipient_list)
         msg.attach(body)
         # 邮件附件处理
         file_name = file_name.replace(' ', '')
@@ -80,9 +89,9 @@ async def send_email_with_attachment(file_content: bytes, file_name: str, file_t
             server.starttls()  # 启用TLS
             server.ehlo()  # 重新与服务器打招呼
             server.login(SMTP_FROM, SMTP_PASSWORD)
-            server.sendmail(SMTP_FROM, SMTP_TO_LIST, msg.as_string())
-        logger.info(f"文件 {file_name} 已发送到 {SMTP_TO_LIST}")
-        return f"文件 {file_name} 已发送到 {SMTP_TO_LIST}，发送结果：OK"
+            server.sendmail(SMTP_FROM, recipient_list, msg.as_string())
+        logger.info(f"文件 {file_name} 已发送到 {recipient_list}")
+        return f"文件 {file_name} 已发送到 {recipient_list}，发送结果：OK"
 
 
 async def check_smtp_info():

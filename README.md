@@ -1,115 +1,152 @@
 # EasyAccounts  
 
-**中文记账软件**  
-EasyAccounts是一款中文记账软件，主要的作用是简易记账  
-基础功能有，每月流水记账，快速记账，筛选，分析  
-特色功能有，生成Excel账单，定时备份数据库、账单数据推送  
-使用Docker部署  
-|  [项目部署](./README-Deploy.md) ｜ 功能介绍 | 
+## 简介
+EasyAccounts是一款**开源中文记账软件**  
+如果恰好你也是一个喜欢记账的人，并且符合下面的项目要求  
+如果你对互联网上的记账App不放心，如果你怕**信息泄露**，如果你怕几年的**数据丢失**  
+🎉🎉🎉也许这个项目能满足你的需求  
+### 面向受众：
+- 家庭
+- 个人
 
+> 项目无法支撑团队记账，所以不推荐团队使用。  
+
+### 项目要求
+- 有一定的计算机基础
+- 会部署Docker
+- 理解记账的基本概念
+- 有可以部署的平台(见下文)
 ### 支持平台  
 * Ubuntu&Debain  
 * Windows  
 * Mac OS  
 * 飞牛私有云 Fnos  
 
+### 项目特点
+- 记账基础维度：
+  - 账户
+  - 收支操作
+  - 分类
+  - 明细
 
+- 数据筛选维度：
+  - 时间
+  - 账户
+  - 分类(2级)
+  - 备注
+
+- 易用性维度：
+  - 自己设置模板，3步一笔账
+  - 生成Excel账单，自己制作账本
+  - 定时备份数据库
+  - 账单数据推送
 ---
-### Update plan：  
-2025更新计划  
+
+具体内容见项目主页：[GitPage](https://qingheyang.github.io/EasyAccounts/#/)
+
+## 更新计划
+### 2025 Update plan：  
+更新计划  
 本来投入到另外一个项目中，后来多方面的原因，进度有些推不动  
 今年还会做一些开发，大概有下面的几个内容  
 - [ ] 增加数据库切换，Mysql / sqlite  
-- [ ] 增加鉴权功能，主要是用户名和密码  
+- [x] ~~增加鉴权功能，主要是用户名和密码~~  
 - [ ] 桌面端开发，预计是Electron  
 - [ ] 安卓移动端开发 （苹果我没有账号）  
 
-已经有几个月没有做这个，看了下Docker hub的下载记录，还是有不少下载量的，所以还是会继续做下去。  
-同志们，你们在各个平台给我的反馈我都收到了，不会让你们失望的~  
+### 2.4.0 Feature 
+更新日期：2025-02-07  
+更新视频：[【开源记账软件 EasyAccounts v2.4.0 新版本说明】 ](https://www.bilibili.com/video/BV1P1NPe4Er8/?share_source=copy_web&vd_source=d0722b43e81cb8a8b7ef09b76193df8d)
+- 重要特性
+  - 增加登录功能，可以通过compose来开启关闭，compose不设置，默认关闭
+  - 增加统计功能，原财务分析页面作废，统计功能为按分类统计汇总，按单项分类汇总，可按月查看单项分类
+- 新增功能
+  - 增加点击生成Excel报表后反馈，变为同步式等待
+  - webhook修改逻辑判断
+  - 重构总览界面，增加当年月度概览，账户详情转移至顶部
+  - 记一笔按钮转移至明细（原流水）界面底部，可以拖动（电脑端可点击）
+  - 筛选入口转移至原记一笔位置，主页不在提供筛选选项卡
+  - 筛选默认开启备注搜索
+明细
+  - 分类管理增加不参与统计选项，不参与统计的分类不会出现在统计页面
+- fixbugs
+  - 修复主页请求500错误，跨年后请求错误
+  - 修复webhook发送邮件，多收件人可能发送失败问题
+  - 生成历史月份Excel，报表中账户金额可以追溯
+- 技术特性
+  - 增加外部Mysql数据库支持，可以通过compose来开启关闭，compose不设置，默认关闭
+  - 前端VUE2->VUE3
+  - 前端组件Vant2->Vant4
 
----
-
-2.2.1 Bug Fixs
-- [x] 修复PC端无法点击按钮记账问题，恢复原样
-
-2.1.0 Feature  
-- [x] WebHook增加使用自已邮箱功能  
-- [x] 备注搜索功能  
-- [x] 分类绑定收支、归档、停用功能
-- [x] 快记模板功能
-- [x] 优化前端页面，美化页面
-
----
-### 升级教程：
-升级见：[Release-Note](./Release-Note.md)  
+### 升级教程及历史版本
+[Release-Note](https://qingheyang.github.io/EasyAccounts/#/version/Release-Notes)  
   
 
 ## 功能  
 使用功能详见：  [【开源记账软件 EasyAccounts 使用教程-哔哩哔哩】 ](https://b23.tv/BV1Ds421w78S)  
-截图等详见： [关于我写的个人记账软件方案 - 四点不在线的小能猫的文章 - 知乎](https://zhuanlan.zhihu.com/p/645208377)
+知乎等详见： [关于我写的个人记账软件方案 - 四点不在线的小能猫的文章 - 知乎](https://zhuanlan.zhihu.com/p/645208377)
 
-项目主体功能是基于账户的记账，所有的金额都是基于账户来进行的。  
 ### 部分截图  
 <table>
-  <tr width="70%">
+  <tr width="80%">
     <td>
-      <img src="./image/Home.png" width="100%" />
-      <p align="center">首页界面</p>
+      <img src="./image/Feature/Feature-Board.png" width="100%" />
+      <p align="center">总览</p>
     </td>
     <td>
-      <img src="./image/Flow.png" width="100%" />
-      <p align="center">流水界面</p>
+      <img src="./image/Feature/Feature-Flow.png" width="100%" />
+      <p align="center">明细</p>
     </td>
     <td>
-      <img src="./image/Insert.png" width="100%" />
-      <p align="center">新增流水</p>
+      <img src="./image/Feature/Feature-Analysis-List.png" width="100%" />
+      <p align="center">统计</p>
     </td>
     <td>
-      <img src="./image/Insert_note.png" width="100%" />
-      <p align="center">流水确认</p>
+      <img src="./image/Feature/Feature-About.png" width="100%" />
+      <p align="center">设置</p>
     </td>
   </tr>
-  <tr width="70%">
+  <tr width="80%">
     <td>
-      <img src="./image/Analysis.png" width="100%" />
-      <p align="center">财务分析</p>
+      <img src="./image/Feature/Feature-Board-Accounts.png" width="100%" />
+      <p align="center">总览账户</p>
     </td>
     <td>
-      <img src="./image/Screen.png" width="100%" />
-      <p align="center">筛选界面</p>
+      <img src="./image/Feature/Feature-Flow-Add.png" width="100%" />
+      <p align="center">新增明细</p>
     </td>
     <td>
-      <img src="./image/Screen_more.png" width="100%" />
-      <p align="center">更多筛选</p>
+      <img src="./image/Feature/Feature-Flow-Template.png" width="100%" />
+      <p align="center">筛选</p>
     </td>
     <td>
-      <img src="./image/Type.png" width="100%" />
+      <img src="./image/Feature/Feature-Screen.png" width="100%" />
       <p align="center">分类界面</p>
     </td>
   </tr>
-  <tr width="70%">
+  <tr width="80%">
     <td>
-      <img src="./image/Action.png" width="100%" />
-      <p align="center">收支操作</p>
+      <img src="./image/Feature/Feature-Type-List.png" width="100%" />
+      <p align="center">分类列表</p>
     </td>
     <td>
-      <img src="./image/Add_Account.png" width="100%" />
-      <p align="center">添加账号</p>
+      <img src="./image/Feature/Feature-Analysis-Type.png" width="100%" />
+      <p align="center">分类单项统计</p>
     </td>
     <td>
-      <img src="./image/Add_template.png" width="100%" />
-      <p align="center">新增模板</p>
+      <img src="./image/Feature/Feature-Analysis-Chart.png" width="100%" />
+      <p align="center">统计图表</p>
     </td>
     <td>
-      <img src="./image/Choose_template.png" width="100%" />
-      <p align="center">选择模板</p>
+      <img src="./image/Feature/Feature-Login.png" width="100%" />
+      <p align="center">登录</p>
     </td>
   </tr>
 
 </table>
 
 <table>
-  <tr width="70%">
+  <tr width="80%">
     <td>
       <img src="./image/Swagger_info.png" width="100%" />
       <p align="center">Swagger 文档</p>
@@ -180,17 +217,6 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
   
 上述两个地址详见：[项目部署-项目访问](https://github.com/QingHeYang/EasyAccounts/blob/main/README-Deploy.md#%E9%A1%B9%E7%9B%AE%E6%9C%8D%E5%8A%A1%E8%AF%B4%E6%98%8E)  
 
-## 注意  
-如果你不会写代码也无所谓，但是一定要记得定时备份数据库文件、Excel文件。  
-
-还有就是要注意，项目是没有使用任何Auth鉴权的，所以一定要注意项目的安全性。
-我是不推荐暴露端口到公网的，如果你要暴露端口到公网，一定要注意安全性。  
-
-~~基于上述原则，后需我大概率不会增加登录功能，因为没有任何系统是安全的，何况是个人开发者的项目。~~  
-**鉴权功能设计中**
-
-## 部署&更新
-参阅部署文档  : [项目部署](./README-Deploy.md)  
 
 ## 结语  
 该项目会长期维护下去，因为我自己就一直在使用，如果你有什么关于记账的想法，我会酌情评估添加。  

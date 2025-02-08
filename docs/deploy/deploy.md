@@ -95,6 +95,16 @@ docker-compose up -d
 docker-compose -f docker-compose-chinese.yml up -d
 ```
 
+## 项目访问
+- 记账系统：访问 http://ip:10669 ，如果开启了登录功能，需要先注册账号，然后登录
+- SwaggerApi：http://ip:10670/swagger-ui.html ，可以查看服务端的接口文档
+- 生成的excel、sql文件：http://ip:10669/resources/ ，可以查看生成的excel、sql文件，可以自行下载
+
+## 项目端口说明
+- server容器：10670
+- nginx容器：10669 (记账页面)
+- webhook容器：10671
+
 ## 配置项目(可选)  
 
 ### server容器配置

@@ -64,3 +64,6 @@ docker-compose -f docker-compose-chinese.yml up -d
 
 此时，`Database/data`文件夹应该会重新自动生成  
 等待数据初始化，进入系统即可
+
+## 忘记密码  
+参考这里：[重置密码](faq/faq.md#q2-忘记密码怎么办)

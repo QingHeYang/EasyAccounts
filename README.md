@@ -219,6 +219,8 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
   
 上述两个地址详见：[项目部署-项目访问](https://qingheyang.github.io/EasyAccounts/#/deploy/deploy?id=%e9%a1%b9%e7%9b%ae%e8%ae%bf%e9%97%ae)  
 
+## 项目贡献  
+请阅读贡献指南：[贡献指南](https://qingheyang.github.io/EasyAccounts/#/develop/develop?id=%e8%b4%a1%e7%8c%ae%e6%8c%87%e5%8d%97-1)
 
 ## 结语  
 该项目会长期维护下去，因为我自己就一直在使用，如果你有什么关于记账的想法，我会酌情评估添加。  

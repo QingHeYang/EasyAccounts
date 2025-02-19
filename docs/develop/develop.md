@@ -1,5 +1,7 @@
 # 贡献指南
 
+项目源码在这里：https://github.com/QingHeYang/EasyAccountsOpenSource
+
 感谢你对本项目的贡献！为了帮助你更顺利地参与开发，请按照以下步骤操作。
 
 ## 开发流程

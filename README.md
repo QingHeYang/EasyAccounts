@@ -1,10 +1,10 @@
 # EasyAccounts  
 
 ## 重要通知  
-已经部署的同志们，使用`docker-compose-chinese.yml` 的同志们，请关注如下内容：
+<span style="color:red;">已经部署的同志们，使用`docker-compose-chinese.yml` 的同志们，请关注如下内容：</span> <br>
 由于我个人的失误，不小心把我的测试数据库的链接带到了 `docker-compose-chinese.yml` 文件中  
-使用 `docker-compose-chinese.yml` 的同志，请检查如下内容：  
-第 `54行` - `57行`  
+<span style="color:red;">请检查 `docker-compose-chinese.yml` 的如下内容：  
+第 `54行` - `57行`</span> <br>  
 ```
       - MYSQL_HOST=www.deep-blue.cloud                # 解开注释则需要填写数据库地址，否则默认为db
       - MYSQL_PORT=10668                        # 解开注释则需要填写数据库端口号，否则默认为3306

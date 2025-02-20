@@ -1,5 +1,31 @@
 # EasyAccounts  
 
+## 重要通知  
+已经部署的同志们，使用`docker-compose-chinese.yml` 的同志们，请关注如下内容：
+由于我个人的失误，不小心把我的测试数据库的链接带到了 `docker-compose-chinese.yml` 文件中  
+使用 `docker-compose-chinese.yml` 的同志，请检查如下内容：  
+第 `54行` - `57行`  
+```
+      - MYSQL_HOST=www.deep-blue.cloud                # 解开注释则需要填写数据库地址，否则默认为db
+      - MYSQL_PORT=10668                        # 解开注释则需要填写数据库端口号，否则默认为3306
+      - MYSQL_USERNAME=root                    # 解开注释则需要填写数据库用户名，否则默认为root
+```  
+请讲上述内容修改为：  
+```
+      # - MYSQL_HOST=                # 解开注释则需要填写数据库地址，否则默认为db
+      # - MYSQL_PORT=                        # 解开注释则需要填写数据库端口号，否则默认为3306
+      # - MYSQL_USERNAME=                    # 解开注释则需要填写数据库用户名，否则默认为root  
+```  
+重新启动项目：  
+```
+docker compose -f docker-compose-chinese.yml down; docker compose -f docker-compose-chinese.yml up -d  
+```
+
+对此我深表抱歉，本次带来的损失是，新部署的诸位可能会出现network error,以及损失了两天的记账内容  
+下次更新我会谨慎再谨慎  
+再次抱歉！！  
+
+
 ## 简介
 EasyAccounts是一款**开源中文记账软件**  
 如果恰好你也是一个喜欢记账的人，并且符合下面的项目要求  

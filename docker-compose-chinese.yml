@@ -51,9 +51,9 @@ services:
     image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-server:latest # 此处使用阿里云镜像
     environment:
       #-------------------以下为服务端数据库环境变量，如果不需要外部部署数据库，请勿修改-------------------
-      #- MYSQL_HOST=192.168.10.1                # 解开注释则需要填写数据库地址，否则默认为db
-      #- MYSQL_PORT=3306                        # 解开注释则需要填写数据库端口号，否则默认为3306
-      #- MYSQL_USERNAME=root                    # 解开注释则需要填写数据库用户名，否则默认为root
+      # - MYSQL_HOST=                # 解开注释则需要填写数据库地址，否则默认为db
+      # - MYSQL_PORT=                        # 解开注释则需要填写数据库端口号，否则默认为3306
+      # - MYSQL_USERNAME=                    # 解开注释则需要填写数据库用户名，否则默认为root
 
       - DB_PASSWORD=easy_accounts               # 数据库密码,默认easy_accounts，如果使用外部数据库，请修改此处
       - SQL_BACKUP_TIME=00 00 22 * * ?          # SQL备份时间 corn表达式,默认每天晚上10点

@@ -42,7 +42,7 @@ EasyAccounts是一款**开源中文记账软件**
 ---
 
 ### 项目主页
-具体内容见项目主页：[GitPage](https://qingheyang.github.io/EasyAccounts/#/function/README)  
+具体内容见项目主页：[GitPage](https://qingheyang.github.io/EasyAccounts/#/README)  
 项目部署说明：[项目部署](https://qingheyang.github.io/EasyAccounts/#/deploy/deploy)
 
 ## 更新计划

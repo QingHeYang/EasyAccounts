@@ -164,8 +164,13 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
 
 ### 其他功能
 
-1. Swagger接口文档，可以查看接口文档，支持自定义开发前端。 ![](image/Swagger.png)
-2. Nginx提供生成文件的下载服务，可以直接下载生成的文件 ![](image/Nginx.png)
+* Swagger接口文档，可以查看接口文档，支持自定义开发前端。&#x20;
+
+![](image/Swagger.png)
+
+* Nginx提供生成文件的下载服务，可以直接下载生成的文件
+
+![](image/Nginx.png)
 
 上述两个地址详见：[项目部署-项目访问](deploy/deploy.md#xiang-mu-fang-wen)
 

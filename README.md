@@ -42,8 +42,8 @@ EasyAccounts是一款**开源中文记账软件**
 ---
 
 ### 项目主页
-具体内容见项目主页：[GitPage](https://qingheyang.github.io/EasyAccounts/#/README)  
-项目部署说明：[项目部署](https://qingheyang.github.io/EasyAccounts/#/deploy/deploy)
+具体内容见项目主页：[GitBook](https://mercys-organization-2.gitbook.io/easyaccounts/)  
+项目部署说明：[项目部署](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/deploy)
 
 ## 更新计划
 ### 2025 Update plan：  
@@ -79,7 +79,7 @@ EasyAccounts是一款**开源中文记账软件**
   - 前端组件Vant2->Vant4
 
 ### 升级教程及历史版本
-[Release-Note](https://qingheyang.github.io/EasyAccounts/#/version/Release-Notes)  
+[Release-Note](https://mercys-organization-2.gitbook.io/easyaccounts/release-notes)  
   
 
 ## 功能  
@@ -204,7 +204,7 @@ Excel生成后，会自动备份到Resource/excel目录下，对应上面三个�
 
 ### WebHook功能(发送邮件)  
 WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-compose.yml中配置。  
-具体使用方法见：[WebHook使用说明](https://qingheyang.github.io/EasyAccounts/#/deploy/webhook)  
+具体使用方法见：[WebHook使用说明](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/webhook)  
 配置好发送邮件功能后，就可以在手机上接收excel以及SQL文件了，效果如下：  
 <img src="./image/Email_get.png" width="45%" />
 <img src="./image/Email_sql.png" width="45%" />
@@ -215,10 +215,10 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
 2. Nginx提供生成文件的下载服务，可以直接下载生成的文件  
 <img src="./image/Nginx.png" width="65%" />  
   
-上述两个地址详见：[项目部署-项目访问](https://qingheyang.github.io/EasyAccounts/#/deploy/deploy?id=%e9%a1%b9%e7%9b%ae%e8%ae%bf%e9%97%ae)  
+上述两个地址详见：[项目部署-项目访问](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/deploy#xiang-mu-fang-wen)  
 
 ## 项目贡献  
-请阅读贡献指南：[贡献指南](https://qingheyang.github.io/EasyAccounts/#/develop/develop?id=%e8%b4%a1%e7%8c%ae%e6%8c%87%e5%8d%97-1)
+请阅读贡献指南：[贡献指南](https://mercys-organization-2.gitbook.io/easyaccounts/develop/contributing)
 
 ## 开发声明  
 2021年9月-2025年2月开发已有3年5余月  

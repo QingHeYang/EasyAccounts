@@ -90,7 +90,7 @@ root@VM-20-8-ubuntu:~/EasyAccounts# tree -I image
 * nginx容器：
 
 ```shell
-- API_BASE_URL=http://ip:10670    # 此处务必填写server的ip地址，一般是本机ip地址
+- API_BASE_URL=http://{你的IP或者是域名}:10670    # 此处务必填写server的ip地址，一般是本机ip地址
 ```
 
 > Tips: 此时，如果项目已经可以正常运行，可以不用修改其他配置项，直接启动项目
@@ -114,6 +114,10 @@ docker-compose -f docker-compose-chinese.yml up -d
 * 记账系统：访问 http://ip:10669 ，如果开启了登录功能，需要先注册账号，然后登录
 * SwaggerApi：http://ip:10670/swagger-ui.html ，可以查看服务端的接口文档
 * 生成的excel、sql文件：http://ip:10669/resources/ ，可以查看生成的excel、sql文件，可以自行下载
+
+{% hint style="warning" %}
+&#x20;   [ 外网部署无法访问，点这里](../faq/wai-wang-fang-wen-faq.md)
+{% endhint %}
 
 ## 项目端口说明
 

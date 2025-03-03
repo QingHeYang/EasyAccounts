@@ -1,6 +1,7 @@
 # EasyAccounts项目部署
 
-下面内容针对Debain系统的Docker部署
+下面内容针对Debain系统的Docker部署  
+更多平台部署请参考[平台部署](../platform/ubuntu&windows.md)
 
 ## 环境准备
 

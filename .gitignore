@@ -13,3 +13,5 @@ Server/auth/*
 release_start.sh
 develop_start.sh
 docker-compose-release.yml
+CLAUDE.md
+.claude/*

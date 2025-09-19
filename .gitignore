@@ -5,11 +5,23 @@ WebHook/webhook-tools.py
 *.jar
 *.xls
 Resource/sql/*
+Resource/images/*
+Resource/excel/**/*.xls
+Resource/excel/**/*.xlsx
 
 Database/data/*
 Database/init/*
 Server/auth/*
+Server/logs/*
 
 release_start.sh
 develop_start.sh
 docker-compose-release.yml
+CLAUDE.md
+.claude/*
+
+# AI相关的个人配置文件
+AI/database/*.db
+AI/logs/*
+AI/me.prompt
+AI/小易-self.role

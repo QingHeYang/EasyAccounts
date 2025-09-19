@@ -100,16 +100,27 @@ services:
     networks:
       - easy_accounts_net
 
-  # 如果不想使用AI相关的功能，删掉下方的ai服务即可
+  # AI智能助手服务（可选）
+  # 如果不想使用AI功能，可以删除或注释掉整个ai服务块
   ai:
     image: 775495797/easyaccounts-ai:latest
     container_name: easy_accounts_ai
     restart: always
     environment:
-      # LLM 配置（必需 - 请填入您的实际值）
-      - LLM_EASY_ACCOUNTS_API_KEY=     # 替换为您的API密钥
-      - LLM_EASY_ACCOUNTS_URL=         # 替换为您的API地址
-      - LLM_EASY_ACCOUNTS_MODEL=       # 替换为您要使用的模型
+      # LLM 配置（请替换为您的实际配置）
+      # 默认使用 OpenAI API 配置，您需要：
+      # 1. 前往 https://platform.openai.com 申请 API Key
+      # 2. 将下面的 sk-your-openai-key-here 替换为您的实际密钥
+      
+      - LLM_EASY_ACCOUNTS_API_KEY=sk-your-openai-key-here  # 替换为您的 OpenAI API Key
+      - LLM_EASY_ACCOUNTS_URL=https://api.openai.com/v1
+      - LLM_EASY_ACCOUNTS_MODEL=gpt-3.5-turbo
+      
+      # 其他可选的 LLM 服务配置示例：
+      # 月之暗面 Kimi:
+      #- LLM_EASY_ACCOUNTS_API_KEY=sk-your-kimi-key
+      #- LLM_EASY_ACCOUNTS_URL=https://api.moonshot.cn/v1
+      #- LLM_EASY_ACCOUNTS_MODEL=moonshot-v1-8k
       
     volumes:
       # 数据库持久化

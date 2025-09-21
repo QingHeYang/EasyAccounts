@@ -4,6 +4,7 @@
 * [目录总览](_sidebar.md)
 * [部署](deploy/README.md)
   * [EasyAccounts项目部署](deploy/deploy.md)
+  * [AI智能助手部署](deploy/ai.md)
   * [WebHook功能介绍](deploy/webhook.md)
 * [多平台部署](platform/README.md)
   * [飞牛OS部署](platform/fnos.md)

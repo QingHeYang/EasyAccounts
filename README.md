@@ -1,6 +1,7 @@
 # EasyAccounts  
 ## 简介
-EasyAccounts是一款**开源中文记账软件**  
+EasyAccounts是一款**开源中文记账软件**    
+新版本增加**AI**功能，可以通过对话查询、新增、修改流水，可以生成你想要的excel  
 如果恰好你也是一个喜欢记账的人，并且符合下面的项目要求  
 如果你对互联网上的记账App不放心，如果你怕**信息泄露**，如果你怕几年的**数据丢失**  
 🎉🎉🎉也许这个项目能满足你的需求  
@@ -20,6 +21,9 @@ EasyAccounts是一款**开源中文记账软件**
 * Windows  
 * Mac OS  
 * 飞牛私有云 Fnos  
+
+### 资源消耗  
+500-800MB内存
 
 ### 项目特点
 - 记账基础维度：
@@ -42,18 +46,35 @@ EasyAccounts是一款**开源中文记账软件**
 ---
 
 ### 项目主页
-具体内容见项目主页：[GitPage](https://qingheyang.github.io/EasyAccounts/#/function/README)  
-项目部署说明：[项目部署](https://qingheyang.github.io/EasyAccounts/#/deploy/deploy)
+具体内容见项目主页：[GitBook](https://mercys-organization-2.gitbook.io/easyaccounts/)  
+项目部署说明：[项目部署](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/deploy)
 
 ## 更新计划
 ### 2025 Update plan：  
 更新计划  
 本来投入到另外一个项目中，后来多方面的原因，进度有些推不动  
 今年还会做一些开发，大概有下面的几个内容  
-- [ ] 增加数据库切换，Mysql / sqlite  
-- [x] ~~增加鉴权功能，主要是用户名和密码~~  
+- [x] AI功能引入
+- [x] 增加鉴权功能，主要是用户名和密码 
+- [ ] 账单导入，确定要做
+
+放弃的任务  
+- [ ] ~~增加数据库切换，Mysql / sqlite~~ （不太好改）  
+
+延期（无限）的任务  
 - [ ] 桌面端开发，预计是Electron  
 - [ ] 安卓移动端开发 （苹果我没有账号）  
+
+### 2.5.0 Feature  
+更新日期：2025-09-19  
+更新视频：【待录制】  
+- 重要特性  
+  - AI功能引入，使用用户自己的key即可
+  - 接口反向代理，API_BASE_URL已成历史
+- 新增功能  
+  - 流水添加图片，每个流水可以附带三张图片
+- fix bugs  
+  - 修复一个账单出现很多小数点的问题
 
 ### 2.4.0 Feature 
 更新日期：2025-02-07  
@@ -79,7 +100,7 @@ EasyAccounts是一款**开源中文记账软件**
   - 前端组件Vant2->Vant4
 
 ### 升级教程及历史版本
-[Release-Note](https://qingheyang.github.io/EasyAccounts/#/version/Release-Notes)  
+[Release-Note](https://mercys-organization-2.gitbook.io/easyaccounts/release-notes)  
   
 
 ## 功能  
@@ -142,7 +163,16 @@ EasyAccounts是一款**开源中文记账软件**
       <p align="center">登录</p>
     </td>
   </tr>
-
+  <tr width="80%">
+    <td>
+      <img src="./image/Feature/Feature-Flow-Add-Img.png" width="100%" />
+      <p align="center">附件流水</p>
+    </td>
+    <td>
+      <img src="./image/Feature/Feature-Flow-AI.png" width="100%" />
+      <p align="center">AI对话</p>
+    </td>
+  </tr>
 </table>
 
 <table>
@@ -204,7 +234,7 @@ Excel生成后，会自动备份到Resource/excel目录下，对应上面三个�
 
 ### WebHook功能(发送邮件)  
 WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-compose.yml中配置。  
-具体使用方法见：[WebHook使用说明](https://qingheyang.github.io/EasyAccounts/#/deploy/webhook)  
+具体使用方法见：[WebHook使用说明](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/webhook)  
 配置好发送邮件功能后，就可以在手机上接收excel以及SQL文件了，效果如下：  
 <img src="./image/Email_get.png" width="45%" />
 <img src="./image/Email_sql.png" width="45%" />
@@ -215,10 +245,10 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
 2. Nginx提供生成文件的下载服务，可以直接下载生成的文件  
 <img src="./image/Nginx.png" width="65%" />  
   
-上述两个地址详见：[项目部署-项目访问](https://qingheyang.github.io/EasyAccounts/#/deploy/deploy?id=%e9%a1%b9%e7%9b%ae%e8%ae%bf%e9%97%ae)  
+上述两个地址详见：[项目部署-项目访问](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/deploy#xiang-mu-fang-wen)  
 
 ## 项目贡献  
-请阅读贡献指南：[贡献指南](https://qingheyang.github.io/EasyAccounts/#/develop/develop?id=%e8%b4%a1%e7%8c%ae%e6%8c%87%e5%8d%97-1)
+请阅读贡献指南：[贡献指南](https://mercys-organization-2.gitbook.io/easyaccounts/develop/contributing)
 
 ## 开发声明  
 2021年9月-2025年2月开发已有3年5余月  

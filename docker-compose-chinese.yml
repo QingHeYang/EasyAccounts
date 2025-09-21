@@ -32,9 +32,6 @@ services:
     image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-nginx:latest   #此处使用阿里云镜像
     ports:
       - "10669:80"
-    environment:
-      #-------------------！！必填！！-------------------
-      - API_BASE_URL=http://ip:10670  #此处务必填写Server 的ip地址与端口号 ，见59行
     volumes:
       #- ./Web/dist:/usr/share/nginx/html                             #如若需要自行修改前端，请将前端放置在Web/dist目录下，并解开此行注释
       #- ./Web/nginx/default.conf:/etc/nginx/conf.d/default.conf      #如若需要自行修改nginx配置，请将配置文件放置在Web/nginx/default.conf目录下，并解开此行注释
@@ -66,9 +63,10 @@ services:
       - ./Resource/excel/month:/Ledger/excel/month              # excel 生成月度账单文件目录
       - ./Resource/excel/screen:/Ledger/excel/screen            # excel 生成筛选账单文件目录
       - ./Resource/excel/month:/Ledger/excel/analysis           # excel 生成筛选账单文件目录
+      - ./Resource/images:/Ledger/images                         # 图片上传文件目录
       - ./Server/logs:/Ledger/logs                              # 日志文件目录
       - ./Server/auth:/Ledger/auth                              # 登录认证文件目录,需要映射，否则重启后会丢失用户名密码 
-                                                                # 重置用户名密码请删除auth文件夹下的sercret.key文件
+                                                                # 重置用户名密码请删除auth文件夹下的secret.key文件
       #- ./YD_JZ-SNAPSHOT.jar:/Ledger/app/YD_JZ-SNAPSHOT.jar    # 服务端jar包，如若需要自行修改，请将jar包放置在Server/app目录下，并修改此行
     ports:
       - 10670:8081                               # 左侧映射出去的端口号为服务端口号 默认10670
@@ -102,5 +100,43 @@ services:
 
     networks:
       - easy_accounts_net
+
+  # AI智能助手服务（可选）
+  # 如果不想使用AI功能，可以删除或注释掉整个ai服务块
+  ai:
+    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-ai:latest  # 此处使用阿里云镜像
+    container_name: easy_accounts_ai
+    restart: always
+    environment:
+      # LLM 配置（请替换为您的实际配置）
+      # 默认使用 OpenAI API 配置，您需要：
+      # 1. 前往 https://platform.openai.com 申请 API Key
+      # 2. 将下面的 sk-your-openai-key-here 替换为您的实际密钥
+      
+      - LLM_EASY_ACCOUNTS_API_KEY=sk-your-openai-key-here  # 替换为您的 OpenAI API Key
+      - LLM_EASY_ACCOUNTS_URL=https://api.openai.com/v1
+      - LLM_EASY_ACCOUNTS_MODEL=gpt-3.5-turbo
+      
+      # 国内可用的其他 LLM 服务配置示例：
+      # 月之暗面 Kimi (推荐国内用户):
+      #- LLM_EASY_ACCOUNTS_API_KEY=sk-your-kimi-key
+      #- LLM_EASY_ACCOUNTS_URL=https://api.moonshot.cn/v1
+      #- LLM_EASY_ACCOUNTS_MODEL=moonshot-v1-8k
+
+      
+    volumes:
+      # 数据库持久化
+      - ./AI/database:/app/koalaq_hub_python/resource/database
+      # 日志文件映射
+      - ./AI/logs:/app/logs
+      # 自定义AI角色和指令（可选）
+      - ./AI/小易.role:/app/koalaq_hub_python/resource/role/小易.role
+      - ./AI/task.prompt:/app/koalaq_hub_python/resource/prompts/layers/task/easy_accounts_instructions.prompt
+    
+    depends_on:
+      - server
+    networks:
+      - easy_accounts_net
+
 networks:
   easy_accounts_net:

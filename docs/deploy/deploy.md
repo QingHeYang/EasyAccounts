@@ -1,7 +1,7 @@
 # EasyAccounts项目部署
 
-下面内容针对Debain系统的Docker部署  
-更多平台部署请参考[平台部署](../platform/ubuntu&windows.md)
+下面内容针对Debain系统的Docker部署\
+更多平台部署请参考[平台部署](../platform/ubuntu\&windows.md)
 
 ## 环境准备
 
@@ -75,7 +75,7 @@ root@VM-20-8-ubuntu:~/EasyAccounts# tree -I image
 > Tips: 两个compose文件内容是一样的，只是镜像地址不同\
 > 另外如果升级，请使用对应的升级脚本，如果要修改配置，请修改自己选择的compose文件
 
-## 配置项目(必要)
+## 配置项目
 
 项目配置文件在[docker-compose.yml](https://github.com/QingHeYang/EasyAccounts/blob/main/docker-compose.yml)
 
@@ -85,16 +85,6 @@ root@VM-20-8-ubuntu:~/EasyAccounts# tree -I image
 * db: 数据库容器
 * nginx: 前端容器
 * webhook: 处理生成的报表与备份sql的容器
-
-**必要的配置项**
-
-* nginx容器：
-
-```shell
-- API_BASE_URL=http://{你的IP或者是域名}:10670    # 此处务必填写server的ip地址，一般是本机ip地址
-```
-
-> Tips: 此时，如果项目已经可以正常运行，可以不用修改其他配置项，直接启动项目
 
 ## 启动项目
 
@@ -117,7 +107,7 @@ docker-compose -f docker-compose-chinese.yml up -d
 * 生成的excel、sql文件：http://ip:10669/resources/ ，可以查看生成的excel、sql文件，可以自行下载
 
 {% hint style="warning" %}
-&#x20;   [ 外网部署无法访问，点这里](../faq/wai-wang-fang-wen-faq.md)
+[外网部署无法访问，点这里](../faq/wai-wang-fang-wen-faq.md)
 {% endhint %}
 
 ## 项目端口说明

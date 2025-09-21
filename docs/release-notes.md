@@ -52,6 +52,73 @@ docker-compose -f docker-compose.yml up -d
 
 ***
 
+## 2.5.0(AI+图片附件)
+
+* fixbugs
+  * 修复追加账单的时候，偶现的小数点后多位问题
+* 新增功能
+  * 新增账单明细附件功能功能，一笔明细可以附带三张照片
+* 重要特性
+  * 增加AI功能，通过配置自己的api-key，可以使用对应平台的llm进行账单问答，快速记账，修改账目
+*   技术特性
+
+    * 增加nginx容器反向代理功能，摆脱BASE\_URL配置项
+
+
+
+### compose变更字段
+
+```
+nginx:
+    #environment: #删掉该行
+    #    - API_BASE_URL=http://你的IP:10670 #删掉改行
+```
+
+```
+server:
+    volumes:
+        - ./Resource/images:/Ledger/images # 新增图片上传文件目录
+```
+
+```
+  # AI智能助手服务（可选）
+  # 如果不想使用AI功能，可以删除或注释掉整个ai服务块
+  ai:
+    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-ai:latest  # 此处使用阿里云镜像
+    container_name: easy_accounts_ai
+    restart: always
+    environment:
+      # LLM 配置（请替换为您的实际配置）
+      # 默认使用 OpenAI API 配置，您需要：
+      # 1. 前往 https://platform.openai.com 申请 API Key
+      # 2. 将下面的 sk-your-openai-key-here 替换为您的实际密钥
+      
+      - LLM_EASY_ACCOUNTS_API_KEY=sk-your-openai-key-here  # 替换为您的 OpenAI API Key
+      - LLM_EASY_ACCOUNTS_URL=https://api.openai.com/v1
+      - LLM_EASY_ACCOUNTS_MODEL=gpt-3.5-turbo
+      
+      # 国内可用的其他 LLM 服务配置示例：
+      # 月之暗面 Kimi (推荐国内用户):
+      #- LLM_EASY_ACCOUNTS_API_KEY=sk-your-kimi-key
+      #- LLM_EASY_ACCOUNTS_URL=https://api.moonshot.cn/v1
+      #- LLM_EASY_ACCOUNTS_MODEL=moonshot-v1-8k
+
+      
+    volumes:
+      # 数据库持久化
+      - ./AI/database:/app/koalaq_hub_python/resource/database
+      # 日志文件映射
+      - ./AI/logs:/app/logs
+      # 自定义AI角色和指令（可选）
+      - ./AI/小易.role:/app/koalaq_hub_python/resource/role/小易.role
+      - ./AI/task.prompt:/app/koalaq_hub_python/resource/prompts/layers/task/easy_accounts_instructions.prompt
+    
+    depends_on:
+      - server
+    networks:
+      - easy_accounts_net
+```
+
 ## 2.4.0(含登录)
 
 * fixbugs

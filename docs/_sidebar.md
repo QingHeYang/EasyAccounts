@@ -2,6 +2,7 @@
 
 * [简介](./)
 * [部署](deploy/deploy.md)
+* [AI智能助手](deploy/ai.md)
 * [WebHook](deploy/webhook.md)
 * [数据备份与恢复](backup/backup.md)
 * [多平台-Fnos](platform/fnos.md)

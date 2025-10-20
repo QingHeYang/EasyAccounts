@@ -65,9 +65,9 @@ EasyAccounts是一款**开源中文记账软件**
 - [ ] 桌面端开发，预计是Electron  
 - [ ] 安卓移动端开发 （苹果我没有账号）  
 
-### 2.5.0 Feature  
-更新日期：2025-09-19  
-更新视频：【待录制】  
+### 2.5.0 Feature
+更新日期：2025-09-19
+更新视频：[【开源记账软件 EasyAccounts v2.5.0 AI 智能体参上！】 ](https://www.bilibili.com/video/BV1zxnKzHEkF/?share_source=copy_web&vd_source=d0722b43e81cb8a8b7ef09b76193df8d)  
 - 重要特性  
   - AI功能引入，使用用户自己的key即可
   - 接口反向代理，API_BASE_URL已成历史

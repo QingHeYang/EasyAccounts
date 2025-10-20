@@ -245,9 +245,17 @@ WebHook是一个发送邮件，和处理SQL备份的功能，可以在docker-com
 2. Nginx提供生成文件的下载服务，可以直接下载生成的文件  
 <img src="./image/Nginx.png" width="65%" />  
   
-上述两个地址详见：[项目部署-项目访问](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/deploy#xiang-mu-fang-wen)  
+上述两个地址详见：[项目部署-项目访问](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/deploy#xiang-mu-fang-wen)
 
-## 项目贡献  
+## 项目数据
+
+### Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=QingHeYang/EasyAccounts&type=Date)](https://star-history.com/#QingHeYang/EasyAccounts&Date)
+
+---
+
+## 项目贡献
 请阅读贡献指南：[贡献指南](https://mercys-organization-2.gitbook.io/easyaccounts/develop/contributing)
 
 ## 开发声明  

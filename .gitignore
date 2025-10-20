@@ -25,3 +25,4 @@ AI/database/*.db
 AI/logs/*
 AI/me.prompt
 AI/小易-self.role
+docs/video_scripts/*

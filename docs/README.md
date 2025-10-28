@@ -21,7 +21,7 @@ EasyAccounts是一款**开源中文记账软件**
 - 📖理解记账的基本概念
 - 🥘有可以部署的平台(见下文)
 ### 支持平台  
-* Ubuntu&Debain  
+* Ubuntu&Debian  
 * Windows  
 * Mac OS  
 * 飞牛私有云 Fnos  

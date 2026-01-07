@@ -29,7 +29,7 @@ services:
   nginx:
     restart: always
     container_name: easy_accounts_nginx
-    image: 775495797/easyaccounts-nginx:latest
+    image: 775495797/easyaccounts-nginx:3.1.0
     ports:
       - "10669:80"
     volumes:
@@ -44,7 +44,7 @@ services:
   server:
     restart: always
     container_name: easy_accounts_server
-    image: 775495797/easyaccounts-server:latest
+    image: 775495797/easyaccounts-server:2.5.0
     environment:
       #-------------------以下为服务端数据库环境变量，如果不需要外部部署数据库，请勿修改-------------------
       #- MYSQL_HOST=                            # 解开注释则需要填写数据库地址，否则默认为db
@@ -75,7 +75,7 @@ services:
       - easy_accounts_net
   
   webhook:
-    image: 775495797/easyaccounts-webhook:latest
+    image: 775495797/easyaccounts-webhook:1.0.0
     container_name: easy_accounts_webhook
     restart: always
     ports:
@@ -103,7 +103,7 @@ services:
   # AI智能助手服务（可选）
   # 如果不想使用AI功能，可以删除或注释掉整个ai服务块
   ai:
-    image: 775495797/easyaccounts-ai:latest
+    image: 775495797/easyaccounts-ai:1.0.0
     container_name: easy_accounts_ai
     restart: always
     environment:

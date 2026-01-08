@@ -9,6 +9,7 @@
 * [多平台-ubuntu\&windows](platform/ubuntu\&windows.md)
 * [版本更新](version/)
   * [升级指南](version/upgrade-guide.md)
+  * [v2.6.0](version/v2.6.0.md)
   * [v2.5.0](version/v2.5.0.md)
   * [v2.4.0](version/v2.4.0.md)
   * [更多版本](version/)

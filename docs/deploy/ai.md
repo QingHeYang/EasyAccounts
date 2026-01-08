@@ -65,6 +65,30 @@ AI 功能需要配置大语言模型（LLM）服务，支持以下提供商：
 ```
 申请地址：[https://platform.moonshot.cn](https://platform.moonshot.cn)
 
+#### 智谱 AI（国内，支持图像识别）
+```yaml
+- LLM_EASY_ACCOUNTS_API_KEY=your-zhipu-key
+- LLM_EASY_ACCOUNTS_URL=https://open.bigmodel.cn/api/paas/v4
+- LLM_EASY_ACCOUNTS_MODEL=glm-4v-flash
+```
+申请地址：[https://open.bigmodel.cn](https://open.bigmodel.cn)
+
+### 关于图像识别功能
+
+> ⚠️ **重要提示**：如需使用图片上传功能（如拍照识别小票），必须使用支持视觉的 VL 模型（Vision-Language Model）。
+>
+> 使用普通文本模型上传图片会导致当前对话作废。
+
+**支持图像识别的模型示例：**
+- 智谱 AI：`glm-4v-flash`、`glm-4v`
+- OpenAI：`gpt-4-vision-preview`、`gpt-4o`
+- 其他支持视觉的多模态模型
+
+**不支持图像的模型（勿用于图片上传）：**
+- `gpt-3.5-turbo`
+- `moonshot-v1-8k`
+- 其他纯文本模型
+
 
 ### 2. 修改配置文件
 

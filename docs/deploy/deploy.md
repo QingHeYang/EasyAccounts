@@ -12,131 +12,97 @@
 
 项目具有两套地址，自行选择下载，项目内容是同步的
 
-* Github: [EasyAccounts:https://github.com/QingHeYang/EasyAccounts](https://github.com/QingHeYang/EasyAccounts)
-* 码云: [EasyAccounts:https://gitee.com/qingheyang/EasyAccounts](https://gitee.com/qingheyang/EasyAccounts)
+* Github: [https://github.com/QingHeYang/EasyAccounts](https://github.com/QingHeYang/EasyAccounts)
+* GitCode: [https://gitcode.com/Silas_Kafka/EasyAccounts](https://gitcode.com/Silas_Kafka/EasyAccounts)
+
+> 注：原码云（Gitee）地址已迁移至 GitCode
 
 下载项目
 
-github:
+Github:
 
 ```shell
 git clone https://github.com/QingHeYang/EasyAccounts.git
 ```
 
-码云:
+GitCode:
 
 ```shell
-git clone https://gitee.com/qingheyang/EasyAccounts.git
+git clone https://gitcode.com/Silas_Kafka/EasyAccounts.git
 ```
 
-## 数据库初始化
+## 关于国内镜像
 
-**这步很重要，不要忽略**
+> ⚠️ **重要说明**：从 2.6.0 版本起，无法继续提供国内镜像服务。
+>
+> 阿里云容器镜像服务已禁止个人用户上传新镜像，需要开通企业版才能继续使用，鄙人没那个实力。
+>
+> 如果有朋友可以提供镜像服务，万分感谢！
 
-```shell
-cd EasyAccounts
-mkdir -p Database/init
-cp Database/base_sql/yd_jz_base.sql Database/init/yd_jz_base.sql
-```
+## 关于数据库初始化
 
-搭建完后的目录如下：
-
-```shell
-root@VM-20-8-ubuntu:~/EasyAccounts# tree -I image
-.
-├── Database
-│   ├── base_sql
-│   │   └── yd_jz_base.sql
-│   └── init                    # 数据库初始化文件夹
-│       └── yd_jz_base.sql      # 数据库初始化文件
-├── docker-compose-chinese.yml  # docker-compose 阿里云镜像
-├── docker-compose.yml          # docker-compose dockerhub镜像
-├── LICENSE
-├── README-Deploy-Fnos.md
-├── README-Deploy.md
-├── README.md
-├── Release-Note.md
-├── update-docker-chinese.sh    # 更新docker-compose 阿里云镜像
-├── update-docker.sh            # 更新docker-compose dockerhub镜像
-└── WebHook                     # WebHook文件夹,用于发送邮件处理生成的文件
-    ├── README.md
-    ├── webhook-email.py        # 发送邮件脚本，自带发送邮件
-    └── webhook.py              # WebHook脚本，可以自行处理文件，例如发送到企业微信、钉钉等
-```
-
-## 选择compose文件
-
-项目提供两个compose文件，分别是：
-
-* docker-compose.yml: 容器镜像在dockerhub上
-* docker-compose-chinese.yml: 容器镜像在阿里云上\
-  如果你在国内，不方便下载dockerhub镜像，可以选择docker-compose-chinese.yml
-
-> Tips: 两个compose文件内容是一样的，只是镜像地址不同\
-> 另外如果升级，请使用对应的升级脚本，如果要修改配置，请修改自己选择的compose文件
+> ✅ **2.6.0 版本起无需手动初始化数据库**
+>
+> 数据库初始化脚本已内置到 MySQL 镜像中，首次启动会自动完成初始化。
+>
+> 如果是从旧版本恢复数据库，请参考 [数据备份与恢复](../backup/backup.md)
 
 ## 配置项目
 
 项目配置文件在[docker-compose.yml](https://github.com/QingHeYang/EasyAccounts/blob/main/docker-compose.yml)
 
-项目配置文件分为4个容器：
+项目配置文件分为5个容器：
 
-* server: 后端容器
 * db: 数据库容器
 * nginx: 前端容器
+* server: 后端容器
 * webhook: 处理生成的报表与备份sql的容器
+* ai: AI智能助手容器（可选）
 
 ## 启动项目
 
-使用docker-compose启动项目
-
 ```shell
-docker-compose up -d
-```
-
-使用docker-compose-chinese.yml启动项目
-
-```shell
-docker-compose -f docker-compose-chinese.yml up -d
+cd EasyAccounts
+docker compose up -d
 ```
 
 ## 项目访问
 
-* 记账系统：访问 http://ip:10669 ，如果开启了登录功能，需要先注册账号，然后登录
-* SwaggerApi：http://ip:10670/swagger-ui.html ，可以查看服务端的接口文档
-* 生成的excel、sql文件：http://ip:10669/resources/ ，可以查看生成的excel、sql文件，可以自行下载
+**记账系统：http://{你的IP/域名}:10669**
 
-{% hint style="warning" %}
-[外网部署无法访问，点这里](../faq/wai-wang-fang-wen-faq.md)
-{% endhint %}
+首次访问需要注册账号
+
+
+* Swagger 接口文档：http://{你的IP/域名}:10670/docs ，需要在 compose 中开启 server 端口映射才能访问
+* 生成的 Excel、SQL 文件：http://{你的IP/域名}:10669/resources/
 
 ## 项目端口说明
 
-* server容器：10670
-* nginx容器：10669 (记账页面)
-* webhook容器：10671
+* nginx容器：10669 (唯一对外暴露端口，记账页面 + 反向代理)
+
+> 2.6.0 版本起，server、webhook、db 容器不再对外暴露端口，所有请求通过 nginx 反向代理
 
 ## 配置项目(可选)
 
 ### server容器配置
 
-```shell
-- SQL_BACKUP_TIME=00 00 22 * * ?          # corn表达式，每天晚上10点备份数据库  
-- ENABLE_LOGIN=true                       # 是否启用登录功能，默认true 
+```yaml
+- DB_PASSWORD=easy_accounts               # 数据库密码
+- SQL_BACKUP_TIME=00 00 22 * * ?          # cron表达式，每天晚上10点备份数据库
+- ENABLE_LOGIN=true                       # 是否启用登录功能，默认true
 - EXPIRED_TIME=30                         # 登录过期时间，默认30分钟，单位分钟
+- SINGLE_LOGIN=true                       # 是否启用单点登录，默认false
 ```
 
-> Tips: SQL备份时间corn表达式，可以参考这个网站：[在线corn表达式生成](https://www.bejson.com/othertools/cron/)
+> Tips: SQL备份时间cron表达式，可以参考这个网站：[在线cron表达式生成](https://www.bejson.com/othertools/cron/)
 
 ### webhook容器配置
 
 * webhook容器：详见[WebHook](webhook.md)
 
-### nginx容器配置
+### ai容器配置
 
-```shell
-- ./Resource:/usr/share/nginx/html/resources    #资源文件目录，此文件夹提供一个下载功能
-```
+* ai容器：详见[AI智能助手](ai.md)
 
 ### 数据库配置
 
@@ -146,13 +112,13 @@ docker-compose -f docker-compose-chinese.yml up -d
 
 * db容器：
 
-```shell
+```yaml
 - MYSQL_ROOT_PASSWORD: easy_accounts # 数据库root密码
 ```
 
 * server容器：
 
-```shell
+```yaml
 - DB_PASSWORD=easy_accounts     # 数据库密码，与上方db容器的root密码一致
 ```
 
@@ -160,7 +126,7 @@ docker-compose -f docker-compose-chinese.yml up -d
 
 * server容器：
 
-```shell
+```yaml
 - MYSQL_HOST                    # 数据库地址
 - MYSQL_PORT                    # 数据库端口
 - MYSQL_USERNAME                # 数据库用户名
@@ -169,49 +135,11 @@ docker-compose -f docker-compose-chinese.yml up -d
 
 删除掉server容器如下内容：
 
-```shell
+```yaml
 depends_on:
     - db
 ```
 
 ## 启动后文件结构
 
-```shell
-root@VM-20-8-ubuntu:~/EasyAccounts# tree
-.
-├── Database
-│   ├── base_sql
-│   │   └── yd_jz_base.sql          # 数据库初始化文件，项目下载时自带
-│   ├── data                        # 数据库数据文件夹，自动生成
-│   └── init                        # 数据库初始化文件夹
-│       └── yd_jz_base.sql          # 数据库初始化文件，通过命令复制过来的
-├── docker-compose-chinese.yml      # docker-compose 阿里云镜像
-├── docker-compose.yml              # docker-compose dockerhub镜像
-├── image                           # 文档图片
-├── LICENSE                 
-├── README-Deploy-Fnos.md           
-├── README-Deploy.md
-├── README.md
-├── Release-Note.md
-├── Resource                        # 资源文件夹，可以通过nginx访问
-│   ├── excel
-│   │   ├── month                   # 月报表excel保存文件夹
-│   │   └── screen                  # 筛选报表excel保存文件夹
-│   └── sql
-│       └── yd_jz_20240516_2200.sql # 数据库备份文件
-├── Server
-│   ├── auth                        # 登录认证文件夹
-│   │   └── secret.key              # 登录认证key，删除掉可以重新注册
-│   └── logs
-│       ├── app.log                 # server容器日志
-│       └── app-rolling.log
-├── update-docker-chinese.sh        # 更新docker-compose 阿里云镜像
-├── update-docker.sh                # 更新docker-compose dockerhub镜像
-└── WebHook
-    ├── hook.log                    # webhook容器日志
-    ├── __pycache__
-    │   └── webhook.cpython-310.pyc # webhook编译文件，勿删
-    ├── README.md               
-    ├── webhook-email.py            # 发送邮件脚本，自带发送邮件
-    └── webhook.py                  # WebHook脚本，可以自行处理文件，例如发送到企业微信、钉钉等
-```
+（待补充）

@@ -74,8 +74,10 @@ docker compose up -d
 - 支持日间/夜间模式切换
 - AI 增加 MCP 功能（SSE / Streamable-HTTP），可使用第三方 AI 工具
 - AI 增加图像识别功能（需 VL 大模型支持，普通模型上传图片会导致当前对话作废）
+- 账户增加资产与负债属性，现有账户全部转为资产账户，负债账户需要新增
 
 **新增功能**
+- 不计入总金额功能完善，内部转账不计入总金额选项拆分成转出不计入与转入不计入（**不计入总金额的确立是为了记录借钱还钱等操作**，信用卡等初始负债请新建负债账户）
 - 认证模式优化：固定时间退出 → 滑动时间退出，支持多端登录（可在 compose 中配置）
 - AI 工具显示优化，不再显示参数，新增可点击交互工具
 - AI 记账/更新会在备注中默认增加 `#AI记账` `#AI更新` 标签，方便溯源
@@ -92,6 +94,7 @@ docker compose up -d
 **Bug 修复**
 - 修复不计入总金额记账出现 500 问题
 - 修复 AI 选择一级分类记账导致统计分类找不到明细的问题
+- 修复移动端桌面端账户页面不统一问题
 
 **技术特性**
 - 前端 JS → TS，vue-cli → Vite，引入 ECharts、Element Plus、Vant
@@ -107,7 +110,7 @@ docker compose up -d
 - 定时记账
 - 可能会拓展数据库
 
-查看完整版本历史：[更新日志](./changelog.md) | [GitBook](https://mercys-organization-2.gitbook.io/easyaccounts/release-notes)
+查看完整版本历史：[更新日志](./changelog.md) | [GitBook](https://mercys-organization-2.gitbook.io/easyaccounts/version)
 
 
 ## 功能预览

@@ -67,7 +67,7 @@ docker compose up -d
 
 ## 版本动态
 
-### 最新版本 v2.6.0
+### 最新版本 v2.6.0 （[视频介绍](https://www.bilibili.com/video/BV1BErCBsEMQ)）
 
 **重要特性**
 - 新增 PC 端，重构移动端，界面完全重新设计，更符合现代审美
@@ -102,13 +102,14 @@ docker compose up -d
 - Agent 框架（koalaq_hub）优化，引入 FastMCP
 - 部署简化：无需复制初始化数据库文件（已内置到 MySQL 镜像）
 
-### 下一版计划
+### 下一版 v2.6.1（开发中）
 
 > 我思路比较跳脱，很多情况下不会按照计划来
 
+- 页面内恢复数据，无需映射 SQL 脚本
+- 开发者消息通知功能
 - 账单导入
 - 定时记账
-- 可能会拓展数据库
 
 查看完整版本历史：[更新日志](./changelog.md) | [GitBook](https://mercys-organization-2.gitbook.io/easyaccounts/version)
 

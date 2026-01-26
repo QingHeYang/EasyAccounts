@@ -19,7 +19,7 @@ AI 服务已集成在 docker-compose 文件中，作为可选服务：
 
 ```yaml
 ai:
-    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-ai:latest  # 阿里云镜像
+    image: 775495797/easyaccounts-ai:1.1.0
     container_name: easy_accounts_ai
     restart: always
     environment:
@@ -92,11 +92,11 @@ AI 功能需要配置大语言模型（LLM）服务，支持以下提供商：
 
 ### 2. 修改配置文件
 
-编辑你选择的 compose 文件（docker-compose.yml 或 docker-compose-chinese.yml）：
+编辑 docker-compose.yml 文件：
 
 ```bash
 # 编辑配置文件
-vim docker-compose-chinese.yml
+vim docker-compose.yml
 
 # 找到 ai 服务部分，修改环境变量
 # 将 sk-your-openai-key-here 替换为你的实际 API Key
@@ -133,13 +133,13 @@ docker restart easy_accounts_ai
 ### 首次启动
 如果是首次部署，直接启动所有服务：
 ```bash
-docker-compose -f docker-compose-chinese.yml up -d
+docker compose up -d
 ```
 
 ### 添加 AI 服务
 如果已有 EasyAccounts 运行，只需启动 AI 服务：
 ```bash
-docker-compose -f docker-compose-chinese.yml up -d ai
+docker compose up -d ai
 ```
 
 ### 不使用 AI 功能
@@ -147,7 +147,7 @@ docker-compose -f docker-compose-chinese.yml up -d ai
 1. 注释或删除 compose 文件中的整个 ai 服务块
 2. 或者启动时排除 AI 服务：
 ```bash
-docker-compose -f docker-compose-chinese.yml up -d db nginx server webhook
+docker compose up -d db nginx server webhook
 ```
 
 ## 验证部署

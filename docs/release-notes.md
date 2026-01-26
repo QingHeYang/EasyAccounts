@@ -1,53 +1,23 @@
-# Relase-Notes
+# Release-Notes
 
 ## 升级方法
 
-升级方法一般固定，只有在特殊情况下才会有变化，如有变化会在版本更新说明中说明。 升级方法：
+升级方法一般固定，只有在特殊情况下才会有变化，如有变化会在版本更新说明中说明。
 
-* 请先备份数据库
-
-使用阿里云镜像部署（docker-compose-chinese.yml）升级：
+**请先备份数据库！**
 
 ```bash
 # 停止容器
-docker-compose -f docker-compose-chinese.yml down
-```
+docker compose down
 
-```bash
-# 增加权限
-chmod +x update-docker-chinese.sh
-```
-
-```bash
-# 更新镜像
-./update-docker-chinese.sh
-```
-
-```bash
-# 启动容器
-docker-compose -f docker-compose-chinese.yml up -d
-```
-
-使用Docker-Hub部署（docker-compose.yml）升级：
-
-```bash
-# 停止容器
-docker-compose down
-```
-
-```bash
 # 增加权限
 chmod +x update-docker.sh
-```
 
-```bash
 # 更新镜像
 ./update-docker.sh
-```
 
-```bash
 # 启动容器
-docker-compose -f docker-compose.yml up -d
+docker compose up -d
 ```
 
 ***
@@ -84,7 +54,7 @@ server:
   # AI智能助手服务（可选）
   # 如果不想使用AI功能，可以删除或注释掉整个ai服务块
   ai:
-    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-ai:latest  # 此处使用阿里云镜像
+    image: 775495797/easyaccounts-ai:1.1.0
     container_name: easy_accounts_ai
     restart: always
     environment:

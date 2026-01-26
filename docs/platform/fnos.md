@@ -11,11 +11,11 @@
 1. 下载项目到本地，无论是什么系统，下载完后解压，此操作无需在Fnos上做，可以在windows或者别的操作系统中执行    
 <img src="/image/fnos-download.png" width="75%" />  
 
-2. 修改项目内容  
-- 在 `./Database/`文件夹下创建init文件夹
-- **新用户**：将 `./Database/base_sql/yd_jz_base.sql` 复制到`./Database/init`中  
-- **老用户**：将曾经备份好的数据库sql文件，放到`./Database/init`中修改完的项目结构如下：  
-<img src="/image/fnos-folder.png" width="75%" />  
+2. 修改项目内容（v2.6.0+ 已无需此步骤）
+
+> **v2.6.0 及以上版本**：数据库初始化文件已内置到 MySQL 镜像中，新用户无需手动复制 SQL 文件，直接启动即可。
+>
+> **老用户恢复数据**：可使用页面恢复功能（v2.6.1+），或参考 [数据恢复文档](/backup/backup.md)  
 
 
 3. （可选）老用户可以选择将自己的docker-compose.yml替换掉新下载项目的对应compose文件  
@@ -65,15 +65,15 @@ ll
 <img src="/image/fnos-choose.png" width="75%" /> 
 <img src="/image/fnos-compose.png" width="75%" /> 
 
-### 修改compose  
-* 新用户：(可以访问dockerhub则跳过该步骤)dockerhub访问不畅可以使用国内镜像：  
-将`EasyAccounts/docker-compose-chinese.yml`的内容复制到项目构建框中  
-<img src="/image/fnos-china.png" width="75%" /> 
-<img src="/image/fnos-compose-deploy.png" width="75%" /> 
+### 修改compose
 
-* 老用户：将自己的compose文件粘贴进入上图的编辑框中即可
+将 `docker-compose.yml` 的内容复制到项目构建框中
 
-按照标准[部署文档](/deploy/deploy.md)  修改compose对应的内容，此处不在赘述  
+<img src="/image/fnos-compose-deploy.png" width="75%" />
+
+按照标准[部署文档](/deploy/deploy.md) 修改 compose 对应的内容，此处不再赘述
+
+> **注意**：从 v2.6.0 起，国内镜像（docker-compose-chinese.yml）已停止支持  
 
 ### 构建  
 启动构建  

@@ -3,18 +3,16 @@
 server容器会将这几个文件发送到WebHook容器中，你可以自己编写python文件来处理这些文件，比如发送邮件，保存到指定目录等操作  
 我预先内置了一套发送Email的脚本，一套保存文件到本地的脚本，使用者可以根据自己的需求进行修改  
 
-## Compose内容  
+## Compose内容
 ```yaml
 webhook:
-    image: registry.cn-beijing.aliyuncs.com/easy_accounts/easyaccounts-webhook:latest #此处使用阿里云镜像
+    image: 775495797/easyaccounts-webhook:1.0.0
     container_name: easy_accounts_webhook
     restart: always
-    ports:
-      - "10671:8083"
     volumes:
       - ./WebHook:/app/
-      #- ./WebHook/webhook.py:/app/webhook.py           #如果要自行处理文件，则取消这行注释，映射该文件，则下方的环境变量无效
-      - ./WebHook/webhook-email.py:/app/webhook.py     #如需修改发送邮件服务，请解开此行注释
+      #- ./WebHook/webhook.py:/app/webhook.py           #如果要自行处理文件，则取消这行注释
+      #- ./WebHook/webhook-email.py:/app/webhook.py     #如需发送邮件服务，请解开此行注释
     environment:
       - LOG_FILE=/app/hook.log
       - SEND_SQL_BACKUP=True                  # 是否发送SQL备份文件,默认True
@@ -68,9 +66,9 @@ Outlook邮箱：
 - QQ邮箱
 - outlook邮箱  
 
-## 使用方法  
-1. 在`docker-compose.yml`或者`docker-compose-chinese.yml`中配置WebHook配置项  
-2. 启动EasyAccounts项目  
+## 使用方法
+1. 在 `docker-compose.yml` 中配置 WebHook 配置项
+2. 启动 EasyAccounts 项目  
 
 ## 自定义开发  
 解开`docker-compose.yml`中的注释，将`webhook.py`或者`webhook-email.py`映射到容器中，即可自定义开发。  

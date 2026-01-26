@@ -13,16 +13,8 @@
 
 ### 2. 停止服务
 
-根据你的部署方式选择：
-
-**阿里云镜像部署**：
 ```bash
-docker-compose -f docker-compose-chinese.yml down
-```
-
-**Docker Hub 部署**：
-```bash
-docker-compose down
+docker compose down
 ```
 
 ### 3. 更新代码和镜像
@@ -33,14 +25,6 @@ git pull origin main
 ```
 
 **更新镜像**：
-
-阿里云镜像：
-```bash
-chmod +x update-docker-chinese.sh
-./update-docker-chinese.sh
-```
-
-Docker Hub：
 ```bash
 chmod +x update-docker.sh
 ./update-docker.sh
@@ -48,7 +32,7 @@ chmod +x update-docker.sh
 
 ### 4. 更新配置文件
 
-根据版本更新说明，修改 docker-compose.yml 或 docker-compose-chinese.yml 文件。
+根据版本更新说明，修改 docker-compose.yml 文件。
 
 常见配置更新：
 - 环境变量调整
@@ -57,14 +41,8 @@ chmod +x update-docker.sh
 
 ### 5. 启动服务
 
-**阿里云镜像**：
 ```bash
-docker-compose -f docker-compose-chinese.yml up -d
-```
-
-**Docker Hub**：
-```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### 6. 验证升级
@@ -114,7 +92,7 @@ docker logs easy_accounts_server -f
 
 **解决方案**：
 - 确认修改了正确的 compose 文件
-- 重新创建容器：`docker-compose down && docker-compose up -d`
+- 重新创建容器：`docker compose down && docker compose up -d`
 - 清理旧镜像：`docker system prune`
 
 ### 4. AI 服务无法启动

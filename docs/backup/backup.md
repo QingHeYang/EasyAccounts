@@ -1,6 +1,8 @@
 # 数据备份与恢复
 
-EasyAccounts 项目提供了定时备份数据库的功能，可以从备份的sql文件中快速恢复数据。
+EasyAccounts 项目提供了定时备份数据库的功能，可以从备份的 SQL 文件中快速恢复数据。
+
+> **v2.6.1 新增**：支持页面操作恢复数据，无需手动映射 SQL 脚本，详见 [页面恢复数据](#页面恢复数据v261)
 
 ## 数据备份(自动)
 
@@ -33,26 +35,39 @@ root@VM-20-8-ubuntu:~/EasyAccounts/Resource# tree
 5 directories, 1 file
 ```
 
+## 页面恢复数据（v2.6.1+）
+
+v2.6.1 版本起，支持在页面上直接恢复数据，无需手动操作服务器。
+
+**操作步骤**：
+
+1. 进入 **设置** → **系统信息** → **数据恢复**
+2. 选择要恢复的 SQL 备份文件
+3. 点击确认，等待恢复完成
+4. 恢复完成后系统会自动重载数据
+
+> **注意**：恢复操作会覆盖当前数据库，请确保已备份重要数据
+
+---
+
 ## 数据恢复(手动)
 
-1. 准备一份数据库备份文件，如`yd_jz_20250207_2200.sql`
+如果你使用的是 v2.6.0 及以下版本，或需要手动恢复数据，请按以下步骤操作：
+
+1. 准备一份数据库备份文件，如 `yd_jz_20250207_2200.sql`
 2. 关掉容器：
 
 ```shell
-#关掉容器，dockerhub如下
-docker-compose down
-#阿里云镜像如下
-docker-compose -f docker-compose-chinese.yml down
+docker compose down
 ```
 
-3. 删除数据库数据文件夹`/Database/data`，删除掉旧的数据库初始化文件`/Database/init/*`
+3. 删除数据库数据文件夹 `/Database/data`，删除掉旧的数据库初始化文件 `/Database/init/*`
 
 ```shell
-#删除数据库数据文件夹
+# 删除数据库数据文件夹
 rm -rf Database/data
-#删除掉旧的数据库初始化文件
+# 删除掉旧的数据库初始化文件
 rm -rf Database/init/*
-#拷贝备份文件到数据库初始化文件夹
 ```
 
 4. 拷贝备份文件到数据库初始化文件夹
@@ -61,17 +76,23 @@ rm -rf Database/init/*
 cp xxx.sql Database/init/
 ```
 
-5. 重新启动容器
+5. 修改 docker-compose.yml，解开 init 目录映射的注释
 
-```shell
-#启动容器，dockerhub如下
-docker-compose up -d
-#阿里云镜像如下
-docker-compose -f docker-compose-chinese.yml up -d
+```yaml
+volumes:
+  - ./Database/data:/var/lib/mysql
+  - ./Database/init:/docker-entrypoint-initdb.d   # 解开此行注释
 ```
 
-此时，`Database/data`文件夹应该会重新自动生成\
-等待数据初始化，进入系统即可
+6. 重新启动容器
+
+```shell
+docker compose up -d
+```
+
+此时，`Database/data` 文件夹应该会重新自动生成，等待数据初始化，进入系统即可
+
+> **提示**：恢复完成后，建议重新注释掉 init 目录映射，避免下次启动时重复初始化
 
 ## 忘记密码
 

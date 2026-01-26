@@ -19,7 +19,7 @@
 
 从 GitHub 获取 `docker-compose.yml` 文件内容：
 
-[https://github.com/easyaccountsproj/EasyAccounts/blob/main/docker-compose.yml](https://github.com/easyaccountsproj/EasyAccounts/blob/main/docker-compose.yml)
+[https://github.com/QingHeYang/EasyAccounts/blob/main/docker-compose.yml](https://github.com/QingHeYang/EasyAccounts/blob/main/docker-compose.yml)
 
 ### 2. 创建文件夹
 

@@ -19,7 +19,8 @@ icon: hand-wave
     <a href="https://mercys-organization-2.gitbook.io/easyaccounts/">📚 文档</a> •
     <a href="./deploy.md">🐳 部署</a> •
     <a href="./feature-showcase.md">📸 截图</a> •
-    <a href="./changelog.md">📝 历史版本</a>
+    <a href="./changelog.md">📝 历史版本</a> •
+    QQ群：817098590
   </p>
 </div>
 
@@ -248,6 +249,12 @@ docker compose up -d
 另外我是个社恐，加微信、拉群这种事可能会有点迟疑，不是不想理你，是真的社恐，请多包涵。
 
 **关于贡献**：目前新版本还在调试中，源码仓库暂时落后于发布版本，想参与贡献的朋友请耐心等待。
+
+### 交流群
+
+欢迎加入 QQ 群交流：817098590
+
+<img src="./image/QQ_Group.jpg" width="180" />
 
 ### 支持项目
 

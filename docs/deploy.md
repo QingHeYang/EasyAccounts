@@ -6,17 +6,23 @@
 >
 > | 容器 | 当前版本 |
 > |------|----------|
-> | easyaccounts-mysql | 1.0.0 |
-> | easyaccounts-nginx | 4.0.0 |
-> | easyaccounts-server | 2.5.1 |
-> | easyaccounts-webhook | 1.0.0 |
-> | easyaccounts-ai | 1.1.0 |
+> | easyaccounts-mysql | 2.7.0 |
+> | easyaccounts-nginx | 4.1.0 |
+> | easyaccounts-server | 2.7.0 |
+> | easyaccounts-ai | 1.2.0 |
+> | ~~easyaccounts-webhook~~ | **v2.7.0 起已废弃**（邮件功能并入 server） |
+
+> **v2.7.0 重要变更**：
+> - WebHook 容器已废弃，邮件发送由 server 内置
+> - 备份时间、登录配置、SMTP 等不再通过环境变量配置，改在前端「**系统设置**」UI 中配置
+> - 老用户升级请参考 [v2.7.0 升级说明](./changelog.md#270-2026-05)
 
 > **关于国内镜像**：`docker-compose-chinese.yml` 已停止支持与更新，因阿里云停止了免费的镜像仓库服务，无法继续上传镜像。
 
-> **旧版本**：如果不想使用最新版本，可以切换到 2.5.0 分支：
+> **旧版本**：如果不想使用最新版本，可以切换到对应分支：
 > ```bash
-> git checkout 2.5.0
+> git checkout 2.6.1   # 切到 v2.6.x（仍使用 webhook 容器与环境变量配置）
+> git checkout 2.5.0   # 切到 v2.5.0
 > ```
 
 ---
@@ -40,11 +46,11 @@ docker compose up -d
 
 ## 容器说明
 
-项目包含 5 个容器，通过 Docker 内部网桥 `easy_accounts_net` 互相通信。
+项目包含 **4 个容器**（v2.7.0 起 webhook 已废弃），通过 Docker 内部网桥 `easy_accounts_net` 互相通信。
 
 ### 1. db (MySQL 数据库)
 
-**镜像**：`775495797/easyaccounts-mysql:1.0.0`
+**镜像**：`775495797/easyaccounts-mysql:2.7.0`
 
 | 环境变量 | 说明 | 默认值 |
 |----------|------|--------|
@@ -82,7 +88,7 @@ docker compose up -d
 
 ### 2. nginx (前端服务)
 
-**镜像**：`775495797/easyaccounts-nginx:4.0.0`
+**镜像**：`775495797/easyaccounts-nginx:4.1.0`
 
 **端口**：`10669:80`（唯一对外暴露的端口）
 
@@ -93,15 +99,11 @@ docker compose up -d
 
 ### 3. server (后端服务)
 
-**镜像**：`775495797/easyaccounts-server:2.5.1`
+**镜像**：`775495797/easyaccounts-server:2.7.0`
 
 | 环境变量 | 说明 | 默认值 |
 |----------|------|--------|
 | DB_PASSWORD | 数据库密码 | easy_accounts |
-| SQL_BACKUP_TIME | SQL 备份时间（cron 表达式） | 00 00 22 * * ? (每天 22:00) |
-| ENABLE_LOGIN | 是否启用登录 | true |
-| EXPIRED_TIME | 登录过期时间（分钟） | 30 |
-| SINGLE_LOGIN | 是否启用单点登录 | true |
 
 **可选配置**（外部数据库）：
 | 环境变量 | 说明 |
@@ -109,6 +111,16 @@ docker compose up -d
 | MYSQL_HOST | 数据库地址 |
 | MYSQL_PORT | 数据库端口 |
 | MYSQL_USERNAME | 数据库用户名 |
+
+> **v2.7.0 配置迁移**：以下环境变量已从容器配置下沉到前端「**系统设置**」UI，启动后在 Web 端配置，**改完立即生效，无需重启容器**：
+>
+> | 旧环境变量 | 迁移到 |
+> |-----------|--------|
+> | `SQL_BACKUP_TIME` | 系统设置 → 备份 |
+> | `ENABLE_LOGIN` | 系统设置 → 鉴权 |
+> | `EXPIRED_TIME` | 系统设置 → 鉴权 |
+> | `SINGLE_LOGIN` | 系统设置 → 鉴权 |
+> | webhook 容器 `SMTP_*` | 系统设置 → 邮件 |
 
 **数据目录**：
 - `./Resource/sql` → SQL 备份文件
@@ -120,31 +132,9 @@ docker compose up -d
 
 ---
 
-### 4. webhook (邮件推送服务)
+### 4. ai (AI 智能助手，可选)
 
-**镜像**：`775495797/easyaccounts-webhook:1.0.0`
-
-| 环境变量 | 说明 | 默认值 |
-|----------|------|--------|
-| TZ | 时区 | Asia/Shanghai |
-| LOG_FILE | 日志文件路径 | /app/hook.log |
-| SEND_SQL_BACKUP | 是否发送 SQL 备份邮件 | True |
-| SEND_EXCEL | 是否发送 Excel 邮件 | True |
-
-**邮件配置**：
-| 环境变量 | 说明 |
-|----------|------|
-| SMTP_SERVER | SMTP 服务器地址 |
-| SMTP_PORT | SMTP 端口 |
-| SMTP_MAIL | 发件人邮箱 |
-| SMTP_PASSWORD | SMTP 授权码 |
-| SMTP_TO_LIST | 收件人列表（逗号分隔） |
-
----
-
-### 5. ai (AI 智能助手，可选)
-
-**镜像**：`775495797/easyaccounts-ai:1.1.0`
+**镜像**：`775495797/easyaccounts-ai:1.2.0`
 
 | 环境变量 | 说明 | 默认值 |
 |----------|------|--------|
@@ -190,7 +180,19 @@ docker compose restart server
 
 ---
 
+## 邮件配置（v2.7.0 起）
+
+SMTP 配置入口已迁移到前端：
+
+1. 启动后访问前端，进入「**系统设置 → 邮件**」
+2. 填写 SMTP 服务器、端口、发件邮箱、授权码、收件人等信息
+3. 保存即可，无需重启容器
+
+老用户从 v2.6.x 升级时，原 `docker-compose.yml` 中的 `webhook:` 服务块和 `SMTP_*` 环境变量需删除，配置在 UI 中重新填写。
+
+---
+
 ## 更多信息
 
 - [详细部署教程](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/deploy)
-- [WebHook 配置说明](https://mercys-organization-2.gitbook.io/easyaccounts/deploy/webhook)
+- [v2.7.0 升级说明](./changelog.md#270-2026-05)

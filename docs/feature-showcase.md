@@ -53,15 +53,11 @@
       <p>设置</p>
     </td>
     <td align="center">
-      <img src="../doc-image/Feature-images/Mobile/setting_info.png" width="200" />
-      <p>关于</p>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
       <img src="../doc-image/Feature-images/Mobile/login.png" width="200" />
       <p>登录</p>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <img src="../doc-image/Feature-images/Mobile/ai_conversion.png" width="200" />
       <p>AI 对话</p>
@@ -70,6 +66,22 @@
       <img src="../doc-image/Feature-images/Mobile/ai_vl.png" width="200" />
       <p>AI 图片识别</p>
     </td>
+    <td align="center">
+      <img src="../doc-image/Feature-images/Mobile/scheduled_flow_list.png" width="200" />
+      <p>定时记账</p>
+    </td>
+    <td align="center">
+      <img src="../doc-image/Feature-images/Mobile/scheduled_flow_add.png" width="200" />
+      <p>定时记账-新建规则</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="../doc-image/Feature-images/Mobile/system_settings.png" width="200" />
+      <p>系统设置</p>
+    </td>
+    <td></td>
+    <td></td>
     <td></td>
   </tr>
 </table>
@@ -133,14 +145,24 @@
       <p>操作管理</p>
     </td>
     <td align="center">
-      <img src="../doc-image/Feature-images/Desktop/setting_applus.png" width="400" />
-      <p>应用设置</p>
+      <img src="../doc-image/Feature-images/Desktop/scheduled_flow.png" width="400" />
+      <p>定时记账</p>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="../doc-image/Feature-images/Desktop/setting_version.png" width="400" />
-      <p>版本信息</p>
+      <img src="../doc-image/Feature-images/Desktop/system_settings.png" width="400" />
+      <p>系统设置</p>
+    </td>
+    <td align="center">
+      <img src="../doc-image/Feature-images/Desktop/setting_applus.png" width="400" />
+      <p>AI+ 设置</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="../doc-image/Feature-images/Desktop/email_template.png" width="400" />
+      <p>邮件样式</p>
     </td>
     <td></td>
   </tr>

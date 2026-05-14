@@ -26,3 +26,7 @@ AI/logs/*
 AI/me.prompt
 AI/小易-self.role
 docs/video_scripts/*
+
+# 本机备份文件（compose 改动前的快照等）
+*.bak
+*.bak.*

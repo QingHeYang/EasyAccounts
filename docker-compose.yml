@@ -7,7 +7,7 @@ services:
   db:   
     restart: always
     container_name: easy_accounts_db
-    image: 775495797/easyaccounts-mysql:1.0.0
+    image: 775495797/easyaccounts-mysql:2.7.0
     environment:
       TZ: Asia/Shanghai
       MYSQL_ROOT_PASSWORD: easy_accounts                #数据库root密码，自行修改，修改完需要修改Server中的数据库密码
@@ -27,7 +27,7 @@ services:
   nginx:
     restart: always
     container_name: easy_accounts_nginx
-    image: 775495797/easyaccounts-nginx:4.0.1
+    image: 775495797/easyaccounts-nginx:4.1.0
     ports:
       - "10669:80"
     volumes:
@@ -42,7 +42,7 @@ services:
   server:
     restart: always
     container_name: easy_accounts_server
-    image: 775495797/easyaccounts-server:2.6.1
+    image: 775495797/easyaccounts-server:2.7.0
     environment:
       #-------------------以下为服务端数据库环境变量，如果不需要外部部署数据库，请勿修改-------------------
       #- MYSQL_HOST=                            # 解开注释则需要填写数据库地址，否则默认为db
@@ -50,12 +50,13 @@ services:
       #- MYSQL_USERNAME=                        # 解开注释则需要填写数据库用户名，否则默认为root
 
       - DB_PASSWORD=easy_accounts               # 数据库密码,默认easy_accounts，如果使用外部数据库，请修改此处
-      - SQL_BACKUP_TIME=00 00 22 * * ?          # SQL备份时间 corn表达式,默认每天晚上10点
-      
-      #-------------------以下为服务端登录功能环境变量-------------------
-      - ENABLE_LOGIN=true                       # 是否启用登录功能，默认true
-      - EXPIRED_TIME=30                         # 登录过期时间，默认30分钟，单位分钟
-      - SINGLE_LOGIN=true                       # 是否启用单点登录，默认false
+
+      # ⚠️ v2.7.0 起以下配置已下沉到「系统设置」UI，启动后在 Web 端配置
+      # - 备份时间（原 SQL_BACKUP_TIME）            → 系统设置 → 备份
+      # - 是否启用登录（原 ENABLE_LOGIN）           → 系统设置 → 鉴权
+      # - 登录过期时间（原 EXPIRED_TIME）           → 系统设置 → 鉴权
+      # - 单设备登录（原 SINGLE_LOGIN）             → 系统设置 → 鉴权
+      # - SMTP 邮件配置（原 webhook 容器各 SMTP_*） → 系统设置 → 邮件
     volumes:
       - ./Resource/sql:/Ledger/backup                        #数据库备份文件目录
       - ./Resource/excel/month:/Ledger/excel/month           #excel 生成月度账单文件目录
@@ -70,34 +71,14 @@ services:
     networks:
       - easy_accounts_net
   
-  webhook:
-    image: 775495797/easyaccounts-webhook:1.0.0
-    container_name: easy_accounts_webhook
-    restart: always
-    # volumes:  # 如需自定义 webhook 脚本，解开以下注释（需先创建对应文件，否则会报错）
-      #- ./WebHook:/app/                                  # 自定义 webhook 脚本目录
-      #- ./WebHook/webhook.py:/app/webhook.py            # 如果要自行处理文件，则映射该文件
-      #- ./WebHook/webhook-email.py:/app/webhook.py      # 如需发送邮件服务，请解开此行注释
-    environment:
-      - TZ=Asia/Shanghai
-      - LOG_FILE=/app/hook.log
-      - SEND_SQL_BACKUP=True                  # 是否发送SQL备份文件,默认True
-      - SEND_EXCEL=True                       # 是否发送Excel文件，默认True
-
-      # -------------------以下为发送邮件服务的环境变量-------------------
-      - SMTP_SERVER=                          # SMTP服务器地址
-      - SMTP_PORT=                            # SMTP端口
-      - SMTP_MAIL=                            # 发件人邮箱，一般来说是SMTP账号，例如自己的QQ邮箱
-      - SMTP_PASSWORD=                        # SMTP密码,一般来说是SMTP账号的授权码,需要自己去自己的邮箱中找到设置
-      - SMTP_TO_LIST=                         # 收件人邮箱列表，用逗号分隔
-
-    networks:
-      - easy_accounts_net
+  # ⚠️ v2.7.0 起 WebHook 模块已废弃，邮件发送能力已内聚到 Server。
+  #    SMTP 配置请在前端「系统设置 → 邮件」中维护，无需任何容器或环境变量。
+  #    老用户升级后，请删除原 webhook 服务块，并在 UI 重新配置 SMTP。
 
   # AI智能助手服务（可选）
   # 如果不想使用AI功能，可以删除或注释掉整个ai服务块
   ai:
-    image: 775495797/easyaccounts-ai:1.1.0
+    image: 775495797/easyaccounts-ai:1.2.0
     container_name: easy_accounts_ai
     restart: always
     environment:

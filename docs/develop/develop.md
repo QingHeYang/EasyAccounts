@@ -111,8 +111,11 @@ spring.datasource.password={YOUR_MYSQL_PASSWORD}
 - vue编码(修改前端)  
 
 ## 贡献指南
-[点击这里查看贡献指南](develop/CONTRIBUTING.md)  
->Tips: 仅接受轻度、中度开发PR
+[点击这里查看贡献指南](CONTRIBUTING.md)
+
+{% hint style="info" %}
+**Tips**：本项目仅接受 Bug 修复类 PR，暂不接受新功能 PR。新功能想法欢迎在 [Issue](https://github.com/QingHeYang/EasyAccounts/issues) 区讨论。
+{% endhint %}
 
 ## 安全声明  
 本项目是开源项目，你可以自由使用，但是请不要将这个项目用于商业用途，无法支撑起商业用途   

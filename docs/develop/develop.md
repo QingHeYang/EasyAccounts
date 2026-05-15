@@ -22,16 +22,14 @@
 │   ├── make_nginx.sh             # 打包脚本，制作nginx镜像
 │   ├── nginx                     # nginx文件夹
 │   │   └── default.conf          # nginx配置文件
-│   └── ydjz_web                  # 前端源码
-│       └── public                # 公共文件夹
-│           └── config.js         # 配置文件，本地运行修改IP链接后台使用
-│
-└── WebHook                      # WebHook文件夹
-    ├── Dockerfile                # Dockerfile
-    ├── make_webhook.sh           # 打包脚本，制作webhook镜像
-    ├── requirements.txt          # 依赖文件
-    └── webhook.py                # webhook源码
-```  
+    └── ydjz_web                  # 前端源码
+        └── public                # 公共文件夹
+            └── config.js         # 配置文件，本地运行修改IP链接后台使用
+```
+
+{% hint style="info" %}
+v2.7.0 起 WebHook 模块已废弃，邮件发送能力内聚到 server 容器，源码中不再有 `WebHook/` 目录。
+{% endhint %}
 
 ## 项目说明
 
@@ -85,35 +83,7 @@ spring.datasource.password={YOUR_MYSQL_PASSWORD}
 制作镜像指南：  
 - 运行脚本：`./make_nginx.sh`，如需更换tag，请自行修改
 
-### WebHook
-- 服务端语言：Python
-- 服务端框架：FastAPI
-- 服务端运行环境：Python3.10
-- 服务端部署方式：Docker
-
-- 本地运行端口号：8083
-- docker运行端口号：10671
-
-本地运行指南：
-1. 安装requirements.txt依赖：`pip install -r requirements.txt`  
-2. 运行webhook.py：`uvicorn webhook:app --host 0.0.0.0 --port 8083`
-
-制作镜像指南：  
-- 运行脚本：`./make_webhook.sh`，如需更换tag，请自行修改  
-
-## 项目开发建议  
-### 轻度开发  
-基于WebHook开发  
-1. 使用已有swagger文档，开发新功能，一般可以用查询、筛选等功能
-2. 在已有的webhook中调用对应的接口即可，使用python编码  
-3. 打包镜像：`./make_webhook.sh`，如需引用额外的python包，修改requirements.txt文件  
-
-轻度开发适用场景：1. 创新性开发、2. 不变更主体逻辑、3. 映射文件后方便修改。
-
-需要能力：  
-- 轻度python编码(AI辅助即可)
-- 使用docker
-- 阅读swagger文档
+## 项目开发建议
 
 ### 中度开发  
 基于服务端、前端开发  

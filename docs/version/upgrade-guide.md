@@ -59,6 +59,31 @@ docker logs easy_accounts_server -f
 
 ## 特定版本升级说明
 
+### 升级到 v2.7.0 ⚠️ 重要变更
+
+- **删除整段 `webhook:` 服务块**（WebHook 容器已废弃，邮件能力并入 server）
+- **删除 server 容器以下 4 个废弃环境变量**：
+  - `SQL_BACKUP_TIME` → 系统设置 → 备份
+  - `ENABLE_LOGIN` → 系统设置 → 鉴权
+  - `EXPIRED_TIME` → 系统设置 → 鉴权
+  - `SINGLE_LOGIN` → 系统设置 → 鉴权
+- 镜像版本号升级：mysql 2.7.0 / nginx 4.1.0 / server 2.7.0 / ai 1.2.0
+- **启动后必须**在前端「系统设置」中重新配置：邮件 SMTP、备份时间、登录方式
+- **反向代理用户**：确保 nginx 配置含 WebSocket Upgrade 三件套（详见 FAQ Q8）
+- 详见 [v2.7.0 版本说明](v2.7.0.md)
+
+### 升级到 v2.6.2
+
+- 无需升级容器，安装独立 [OpenClaw Skill](https://github.com/QingHeYang/EasyAccounts-Skills) 即可
+- 详见 [v2.6.2 版本说明](v2.6.2.md)
+
+### 升级到 v2.6.0 / v2.6.1
+
+- 镜像版本号升级（首次启用独立版本号管理，告别统一 latest）
+- v2.6.0 数据库初始化脚本已内置到 MySQL 镜像，**首次部署的新用户**无需手动 init
+- v2.6.1 支持页面恢复数据，无需手动映射 SQL
+- 详见 [v2.6.1 版本说明](v2.6.1.md) | [v2.6.0 版本说明](v2.6.0.md)
+
 ### 升级到 v2.5.0
 
 - 删除 nginx 的 API_BASE_URL 配置

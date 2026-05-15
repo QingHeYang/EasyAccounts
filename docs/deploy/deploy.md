@@ -33,30 +33,33 @@ git clone https://gitcode.com/Silas_Kafka/EasyAccounts.git
 
 ## 关于国内镜像
 
-> ⚠️ **重要说明**：从 2.6.0 版本起，无法继续提供国内镜像服务。
->
-> 阿里云容器镜像服务已禁止个人用户上传新镜像，需要开通企业版才能继续使用，鄙人没那个实力。
->
-> 如果有朋友可以提供镜像服务，万分感谢！
+{% hint style="warning" %}
+**重要说明**：从 2.6.0 版本起，无法继续提供国内镜像服务。
+
+阿里云容器镜像服务已禁止个人用户上传新镜像，需要开通企业版才能继续使用，鄙人没那个实力。
+
+如果有朋友可以提供镜像服务，万分感谢！
+{% endhint %}
 
 ## 关于数据库初始化
 
-> ✅ **2.6.0 版本起无需手动初始化数据库**
->
-> 数据库初始化脚本已内置到 MySQL 镜像中，首次启动会自动完成初始化。
->
-> 如果是从旧版本恢复数据库，请参考 [数据备份与恢复](../backup/backup.md)
+{% hint style="success" %}
+**2.6.0 版本起无需手动初始化数据库**
+
+数据库初始化脚本已内置到 MySQL 镜像中，首次启动会自动完成初始化。
+
+如果是从旧版本恢复数据库，请参考 [数据备份与恢复](../backup/backup.md)
+{% endhint %}
 
 ## 配置项目
 
 项目配置文件在[docker-compose.yml](https://github.com/QingHeYang/EasyAccounts/blob/main/docker-compose.yml)
 
-项目配置文件分为5个容器：
+项目配置文件分为 **4 个容器**（v2.7.0 起 webhook 已废弃）：
 
 * db: 数据库容器
 * nginx: 前端容器
-* server: 后端容器
-* webhook: 处理生成的报表与备份sql的容器
+* server: 后端容器（内置邮件发送，原 webhook 功能并入）
 * ai: AI智能助手容器（可选）
 
 ## 启动项目
@@ -88,17 +91,19 @@ docker compose up -d
 
 ```yaml
 - DB_PASSWORD=easy_accounts               # 数据库密码
-- SQL_BACKUP_TIME=00 00 22 * * ?          # cron表达式，每天晚上10点备份数据库
-- ENABLE_LOGIN=true                       # 是否启用登录功能，默认true
-- EXPIRED_TIME=30                         # 登录过期时间，默认30分钟，单位分钟
-- SINGLE_LOGIN=true                       # 是否启用单点登录，默认false
 ```
 
-> Tips: SQL备份时间cron表达式，可以参考这个网站：[在线cron表达式生成](https://www.bejson.com/othertools/cron/)
+{% hint style="info" %}
+**v2.7.0 配置迁移**：以下配置已从 compose 环境变量下沉到前端「**系统设置**」UI，启动后在 Web 端配置，**改完立即生效，无需重启容器**：
 
-### webhook容器配置
-
-* webhook容器：详见[WebHook](webhook.md)
+| 旧环境变量 | 现位置 |
+|-----------|--------|
+| `SQL_BACKUP_TIME` | 系统设置 → 备份 |
+| `ENABLE_LOGIN` | 系统设置 → 鉴权 |
+| `EXPIRED_TIME` | 系统设置 → 鉴权 |
+| `SINGLE_LOGIN` | 系统设置 → 鉴权 |
+| webhook 容器 `SMTP_*` | 系统设置 → 邮件 |
+{% endhint %}
 
 ### ai容器配置
 

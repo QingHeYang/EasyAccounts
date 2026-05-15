@@ -3,7 +3,9 @@
 EasyAccounts v2.5.0 新增了 AI 智能助手功能，可以通过对话方式进行记账查询和管理。  
 本文档将指导你如何配置和部署 AI 服务。
 
-> ⚠️ **重要提示**：AI 功能需要将您的查询数据发送到第三方 LLM 服务商进行处理，这是不可避免的。如果您对数据安全有顾虑，可以选择不启用此功能。
+{% hint style="warning" %}
+**重要提示**：AI 功能需要将您的查询数据发送到第三方 LLM 服务商进行处理，这是不可避免的。如果您对数据安全有顾虑，可以选择不启用此功能。
+{% endhint %}
 
 ## 功能介绍
 
@@ -19,7 +21,7 @@ AI 服务已集成在 docker-compose 文件中，作为可选服务：
 
 ```yaml
 ai:
-    image: 775495797/easyaccounts-ai:1.1.0
+    image: 775495797/easyaccounts-ai:1.2.0
     container_name: easy_accounts_ai
     restart: always
     environment:
@@ -75,9 +77,11 @@ AI 功能需要配置大语言模型（LLM）服务，支持以下提供商：
 
 ### 关于图像识别功能
 
-> ⚠️ **重要提示**：如需使用图片上传功能（如拍照识别小票），必须使用支持视觉的 VL 模型（Vision-Language Model）。
->
-> 使用普通文本模型上传图片会导致当前对话作废。
+{% hint style="warning" %}
+**重要提示**：如需使用图片上传功能（如拍照识别小票），必须使用支持视觉的 VL 模型（Vision-Language Model）。
+
+使用普通文本模型上传图片会导致当前对话作废。
+{% endhint %}
 
 **支持图像识别的模型示例：**
 - 智谱 AI：`glm-4v-flash`、`glm-4v`

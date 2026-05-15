@@ -10,7 +10,7 @@
 本文档保留供 **v2.6.x 及更早版本** 用户参考。
 {% endhint %}
 
----
+***
 
 当点击生成 Excel 的时候，当 SQL 数据库备份发生的时候，server 容器会将这些文件发送到 WebHook 容器中。
 
@@ -53,30 +53,35 @@ webhook:
 
 ## Volumes 映射说明
 
-| 映射 | 说明 | 使用场景 |
-|------|------|----------|
-| `./WebHook:/app/` | 映射整个 WebHook 目录 | 需要自定义多个脚本或查看日志文件 |
-| `./WebHook/webhook.py:/app/webhook.py` | 映射自定义处理脚本 | 自行编写处理逻辑 |
-| `./WebHook/webhook-email.py:/app/webhook.py` | 映射邮件发送脚本 | 使用内置的邮件发送功能 |
+| 映射                                           | 说明              | 使用场景             |
+| -------------------------------------------- | --------------- | ---------------- |
+| `./WebHook:/app/`                            | 映射整个 WebHook 目录 | 需要自定义多个脚本或查看日志文件 |
+| `./WebHook/webhook.py:/app/webhook.py`       | 映射自定义处理脚本       | 自行编写处理逻辑         |
+| `./WebHook/webhook-email.py:/app/webhook.py` | 映射邮件发送脚本        | 使用内置的邮件发送功能      |
 
 **使用步骤**：
+
 1. 从 [GitHub](https://github.com/QingHeYang/EasyAccounts/tree/gh-pages/WebHook) 下载对应的脚本文件
 2. 在项目根目录创建 `WebHook` 文件夹，将脚本放入
 3. 解开 docker-compose.yml 中对应的注释
 4. 重启 webhook 容器：`docker compose restart webhook`
-## WebHook使用说明  
-1. WebHook功能需要在EasyAccounts项目中启动，启动后会监听`10671`端口  
-2. WebHook 有两个具体实现的功能类，分别是：  
-    - `webhook.py`  
-    - `webhook-email.py`  
 
-### webhook.py  
-此类的主要功能是提供一个示例，用于展示如何使用WebHook功能，提供了一个保存文件的工具类，并未实现具体发送功能。  
+## WebHook使用说明
 
-### webhook-email.py  
-默认使用的是该文件进行的发送邮件
-此类是发送邮件的具体实现，使用了`email`模块，需要配置邮件服务器的相关信息。  
-在 docker-compose.yml 中配置了邮件服务器的相关信息，如下：  
+1. WebHook功能需要在EasyAccounts项目中启动，启动后会监听`10671`端口
+2. WebHook 有两个具体实现的功能类，分别是：
+   * `webhook.py`
+   * `webhook-email.py`
+
+### webhook.py
+
+此类的主要功能是提供一个示例，用于展示如何使用WebHook功能，提供了一个保存文件的工具类，并未实现具体发送功能。
+
+### webhook-email.py
+
+默认使用的是该文件进行的发送邮件 此类是发送邮件的具体实现，使用了`email`模块，需要配置邮件服务器的相关信息。\
+在 docker-compose.yml 中配置了邮件服务器的相关信息，如下：
+
 ```yaml
   environment:
       - LOG_FILE=/app/hook.log
@@ -89,22 +94,24 @@ webhook:
       - SMTP_MAIL=                            # 发件人邮箱，一般来说是SMTP账号，例如自己的QQ邮箱
       - SMTP_PASSWORD=                        # SMTP密码,一般来说是SMTP账号的授权码,需要自己去自己的邮箱中找到设置
       - SMTP_TO_LIST=                         # 收件人邮箱列表，用逗号分隔
-```  
+```
 
-发送邮件的协议为SMTP,暂不支持别的协议，需要配置SMTP服务器的相关信息，不同的邮件供应商有不同的SMTP服务器地址和端口，例如QQ邮箱的SMTP服务器地址为`smtp.qq.com`，端口为`587`。  
-如果想使用不同的供应商，需要自行去自己的邮箱找对应的配置信息。  
-例如QQ邮箱：  
-![QQ邮箱SMTP配置](./image/QQ_email.png)  
-Outlook邮箱：  
-![Outlook邮箱SMTP配置](./image/Outlook_email.png)  
+发送邮件的协议为SMTP,暂不支持别的协议，需要配置SMTP服务器的相关信息，不同的邮件供应商有不同的SMTP服务器地址和端口，例如QQ邮箱的SMTP服务器地址为`smtp.qq.com`，端口为`587`。\
+如果想使用不同的供应商，需要自行去自己的邮箱找对应的配置信息。\
+例如QQ邮箱：\
+![QQ邮箱SMTP配置](../.gitbook/assets/QQ_email.png)\
+Outlook邮箱：\
+![Outlook邮箱SMTP配置](../.gitbook/assets/Outlook_email.png)
 
-目前测试通过的邮件服务商有：  
-- QQ邮箱
-- outlook邮箱  
+目前测试通过的邮件服务商有：
+
+* QQ邮箱
+* outlook邮箱
 
 ## 使用方法
+
 1. 在 `docker-compose.yml` 中配置 WebHook 配置项
-2. 启动 EasyAccounts 项目  
+2. 启动 EasyAccounts 项目
 
 ## 自定义开发
 
@@ -115,6 +122,7 @@ Outlook邮箱：
 **开发注意事项**：
 
 Docker 容器内的环境包只有如下内容：
+
 ```
 fastapi==0.111.0
 pydantic==2.7.1
@@ -125,10 +133,10 @@ Requests==2.32.2
 
 ## 日志查看
 
-- 如果映射了 `./WebHook:/app/`，日志文件保存在 `WebHook/hook.log`
-- 如果未映射，可通过 `docker logs easy_accounts_webhook` 查看
+* 如果映射了 `./WebHook:/app/`，日志文件保存在 `WebHook/hook.log`
+* 如果未映射，可通过 `docker logs easy_accounts_webhook` 查看
 
 ## 注意事项
 
-- 邮箱端口请使用 TLS 加密端口，不支持 SSL 加密
-- **重要**：映射文件前必须先创建对应文件，否则 Docker 会将其当作目录创建，导致容器启动失败  
+* 邮箱端口请使用 TLS 加密端口，不支持 SSL 加密
+* **重要**：映射文件前必须先创建对应文件，否则 Docker 会将其当作目录创建，导致容器启动失败
